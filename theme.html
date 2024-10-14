@@ -27,6 +27,12 @@
     <div class="info" id="userAgent"></div>
     <div class="info" id="screenInfo"></div>
     <div class="info" id="languageInfo"></div>
+    <div class="info" id="locationInfo"></div>
+    <div class="info" id="memoryInfo"></div>
+    <div class="info" id="networkInfo"></div>
+    <div class="info" id="storageInfo"></div>
+    <div class="info" id="sensorInfo"></div>
+    <div class="info" id="clipboardInfo"></div>
 
     <script>
         // 尝试获取网络状态
@@ -136,6 +142,85 @@
             alert(languageInfo);
         } catch (error) {
             alert("Failed to get language info: " + error);
+        }
+
+        // 尝试获取地理位置
+        try {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const locationInfo = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+                document.getElementById('locationInfo').innerText = locationInfo;
+                alert(locationInfo);
+            }, function(error) {
+                alert("Failed to get location: " + error.message);
+            });
+        } catch (error) {
+            alert("Geolocation API is not supported: " + error);
+        }
+
+        // 尝试获取设备内存信息
+        try {
+            const deviceMemory = navigator.deviceMemory || "Unknown";
+            const memoryInfo = `Device Memory: ${deviceMemory} GB`;
+            document.getElementById('memoryInfo').innerText = memoryInfo;
+            alert(memoryInfo);
+        } catch (error) {
+            alert("Failed to get device memory: " + error);
+        }
+
+        // 尝试获取网络信息
+        try {
+            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if (connection) {
+                const networkInfo = `Effective Type: ${connection.effectiveType}<br>Downlink: ${connection.downlink} Mbps<br>RTT: ${connection.rtt} ms`;
+                document.getElementById('networkInfo').innerHTML = networkInfo;
+                alert(networkInfo);
+            } else {
+                alert("Network Information API is not supported.");
+            }
+        } catch (error) {
+            alert("Failed to get network info: " + error);
+        }
+
+        // 尝试获取存储信息
+        try {
+            navigator.storage.estimate().then(function(estimate) {
+                const storageInfo = `Quota: ${estimate.quota} bytes<br>Usage: ${estimate.usage} bytes`;
+                document.getElementById('storageInfo').innerHTML = storageInfo;
+                alert(storageInfo);
+            }).catch(function(error) {
+                alert("Failed to get storage info: " + error);
+            });
+        } catch (error) {
+            alert("Storage API is not supported: " + error);
+        }
+
+        // 尝试获取传感器信息
+        try {
+            const sensor = new Accelerometer({frequency: 60});
+            sensor.addEventListener('reading', () => {
+                const sensorInfo = `Acceleration along X: ${sensor.x}<br>Acceleration along Y: ${sensor.y}<br>Acceleration along Z: ${sensor.z}`;
+                document.getElementById('sensorInfo').innerHTML = sensorInfo;
+                alert(sensorInfo);
+            });
+            sensor.addEventListener('error', event => {
+                alert("Failed to get sensor info: " + event.error.name + ": " + event.error.message);
+            });
+            sensor.start();
+        } catch (error) {
+            alert("Generic Sensor API is not supported: " + error);
+        }
+
+        // 尝试获取剪贴板内容
+        try {
+            navigator.clipboard.readText().then(function(text) {
+                const clipboardInfo = `Clipboard content: ${text}`;
+                document.getElementById('clipboardInfo').innerText = clipboardInfo;
+                alert(clipboardInfo);
+            }).catch(function(error) {
+                alert("Failed to read clipboard content: " + error);
+            });
+        } catch (error) {
+            alert("Clipboard API is not supported: " + error);
         }
     </script>
 </body>
