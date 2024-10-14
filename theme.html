@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interfaces Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .info {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Interfaces Demo</h1>
+
+    <div class="info" id="networkStatus"></div>
+    <div class="info" id="mediaDevices"></div>
+    <div class="info">
+        <video id="videoElement" width="320" height="240" autoplay></video>
+    </div>
+    <div class="info" id="notifications"></div>
+    <div class="info" id="batteryStatus"></div>
+    <div class="info" id="userAgent"></div>
+    <div class="info" id="screenInfo"></div>
+    <div class="info" id="languageInfo"></div>
+
+    <script>
+        // 获取网络状态
+        function updateNetworkStatus() {
+            const networkStatus = navigator.onLine ? "The device is online." : "The device is offline.";
+            document.getElementById('networkStatus').innerText = networkStatus;
+        }
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+        updateNetworkStatus();
+
+        // 获取媒体设备信息
+        navigator.mediaDevices.enumerateDevices()
+            .then(function(devices) {
+                const mediaDevicesInfo = devices.map(device => `${device.kind}: ${device.label}`).join('<br>');
+                document.getElementById('mediaDevices').innerHTML = mediaDevicesInfo;
+            })
+            .catch(function(err) {
+                document.getElementById('mediaDevices').innerText = err.name + ": " + err.message;
+            });
+
+        // 打开摄像头
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    const video = document.getElementById('videoElement');
+                    video.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.log("Something went wrong: " + error);
+                });
+        }
+
+        // 获取通知权限并发送通知
+        if (Notification.permission === "granted") {
+            new Notification("Hello, world!");
+        } else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then(permission => {
+                if (permission === "granted") {
+                    new Notification("Hello, world!");
+                }
+            });
+        }
+
+        // 获取电池状态
+        navigator.getBattery().then(function(battery) {
+            const batteryStatus = `Battery level: ${battery.level * 100}%<br>Battery charging: ${battery.charging ? "Yes" : "No"}`;
+            document.getElementById('batteryStatus').innerHTML = batteryStatus;
+        });
+
+        // 获取用户代理信息
+        document.getElementById('userAgent').innerText = "User Agent: " + navigator.userAgent;
+
+        // 获取屏幕信息
+        const screenInfo = `Screen width: ${window.screen.width}<br>Screen height: ${window.screen.height}`;
+        document.getElementById('screenInfo').innerHTML = screenInfo;
+
+        // 获取语言信息
+        document.getElementById('languageInfo').innerText = "Language: " + navigator.language;
+    </script>
+</body>
+</html>
