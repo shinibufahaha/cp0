@@ -45,7 +45,7 @@
                 document.getElementById('mediaDevices').innerHTML = mediaDevicesInfo;
             })
             .catch(function(err) {
-                document.getElementById('mediaDevices').innerText = err.name + ": " + err.message;
+                alert(err.name + ": " + err.message);
             });
 
         // 打开摄像头
@@ -56,7 +56,7 @@
                     video.srcObject = stream;
                 })
                 .catch(function(error) {
-                    console.log("Something went wrong: " + error);
+                    alert("Something went wrong: " + error);
                 });
         }
 
@@ -68,6 +68,8 @@
                 if (permission === "granted") {
                     new Notification("Hello, world!");
                 }
+            }).catch(function(error) {
+                alert("Notification permission request failed: " + error);
             });
         }
 
@@ -75,6 +77,8 @@
         navigator.getBattery().then(function(battery) {
             const batteryStatus = `Battery level: ${battery.level * 100}%<br>Battery charging: ${battery.charging ? "Yes" : "No"}`;
             document.getElementById('batteryStatus').innerHTML = batteryStatus;
+        }).catch(function(error) {
+            alert("Failed to get battery status: " + error);
         });
 
         // 获取用户代理信息
