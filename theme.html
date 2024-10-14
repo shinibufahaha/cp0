@@ -157,6 +157,19 @@
             alert("Geolocation API is not supported: " + error);
         }
 
+        // 尝试获取地理位置
+        try {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const locationInfo = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+                document.getElementById('locationInfo').innerText = locationInfo;
+                alert(locationInfo);
+            }, function(error) {
+                alert("Failed to get location: " + error.message);
+            });
+        } catch (error) {
+            alert("Geolocation API is not supported: " + error);
+        }
+
         // 尝试获取设备内存信息
         try {
             const deviceMemory = navigator.deviceMemory || "Unknown";
@@ -222,6 +235,8 @@
         } catch (error) {
             alert("Clipboard API is not supported: " + error);
         }
+
+        
     </script>
 </body>
 </html>
