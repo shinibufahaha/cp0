@@ -35,127 +35,114 @@
     <div class="info" id="clipboardInfo"></div>
 
     <script>
-        // 尝试获取网络状态
-        try {
-            function updateNetworkStatus() {
-                const networkStatus = navigator.onLine ? "The device is online." : "The device is offline.";
-                document.getElementById('networkStatus').innerText = networkStatus;
-                alert(networkStatus);
-            }
-            window.addEventListener('online', updateNetworkStatus);
-            window.addEventListener('offline', updateNetworkStatus);
-            updateNetworkStatus();
-        } catch (error) {
-            alert("Failed to get network status: " + error);
-        }
+        // // 尝试获取网络状态
+        // try {
+        //     function updateNetworkStatus() {
+        //         const networkStatus = navigator.onLine ? "The device is online." : "The device is offline.";
+        //         document.getElementById('networkStatus').innerText = networkStatus;
+        //         alert(networkStatus);
+        //     }
+        //     window.addEventListener('online', updateNetworkStatus);
+        //     window.addEventListener('offline', updateNetworkStatus);
+        //     updateNetworkStatus();
+        // } catch (error) {
+        //     alert("Failed to get network status: " + error);
+        // }
 
-        // 尝试获取媒体设备信息
-        try {
-            navigator.mediaDevices.enumerateDevices()
-                .then(function(devices) {
-                    const mediaDevicesInfo = devices.map(device => `${device.kind}: ${device.label}`).join('<br>');
-                    document.getElementById('mediaDevices').innerHTML = mediaDevicesInfo;
-                    alert("Media devices info: " + mediaDevicesInfo);
-                })
-                .catch(function(err) {
-                    alert("Failed to enumerate media devices: " + err.name + ": " + err.message);
-                });
-        } catch (error) {
-            alert("Failed to access media devices: " + error);
-        }
+        // // 尝试获取媒体设备信息
+        // try {
+        //     navigator.mediaDevices.enumerateDevices()
+        //         .then(function(devices) {
+        //             const mediaDevicesInfo = devices.map(device => `${device.kind}: ${device.label}`).join('<br>');
+        //             document.getElementById('mediaDevices').innerHTML = mediaDevicesInfo;
+        //             alert("Media devices info: " + mediaDevicesInfo);
+        //         })
+        //         .catch(function(err) {
+        //             alert("Failed to enumerate media devices: " + err.name + ": " + err.message);
+        //         });
+        // } catch (error) {
+        //     alert("Failed to access media devices: " + error);
+        // }
 
-        // 尝试打开摄像头
-        try {
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function(stream) {
-                        const video = document.getElementById('videoElement');
-                        video.srcObject = stream;
-                        alert("Camera opened successfully.");
-                    })
-                    .catch(function(error) {
-                        alert("Failed to open camera: " + error);
-                    });
-            } else {
-                alert("Camera API is not supported.");
-            }
-        } catch (error) {
-            alert("Failed to access camera: " + error);
-        }
+        // // 尝试打开摄像头
+        // try {
+        //     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        //         navigator.mediaDevices.getUserMedia({ video: true })
+        //             .then(function(stream) {
+        //                 const video = document.getElementById('videoElement');
+        //                 video.srcObject = stream;
+        //                 alert("Camera opened successfully.");
+        //             })
+        //             .catch(function(error) {
+        //                 alert("Failed to open camera: " + error);
+        //             });
+        //     } else {
+        //         alert("Camera API is not supported.");
+        //     }
+        // } catch (error) {
+        //     alert("Failed to access camera: " + error);
+        // }
 
-        // 尝试获取通知权限并发送通知
-        try {
-            if (Notification.permission === "granted") {
-                new Notification("Hello, world!");
-                alert("Notification sent.");
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        new Notification("Hello, world!");
-                        alert("Notification sent.");
-                    }
-                }).catch(function(error) {
-                    alert("Notification permission request failed: " + error);
-                });
-            } else {
-                alert("Notification permission denied.");
-            }
-        } catch (error) {
-            alert("Failed to send notification: " + error);
-        }
+        // // 尝试获取通知权限并发送通知
+        // try {
+        //     if (Notification.permission === "granted") {
+        //         new Notification("Hello, world!");
+        //         alert("Notification sent.");
+        //     } else if (Notification.permission !== "denied") {
+        //         Notification.requestPermission().then(permission => {
+        //             if (permission === "granted") {
+        //                 new Notification("Hello, world!");
+        //                 alert("Notification sent.");
+        //             }
+        //         }).catch(function(error) {
+        //             alert("Notification permission request failed: " + error);
+        //         });
+        //     } else {
+        //         alert("Notification permission denied.");
+        //     }
+        // } catch (error) {
+        //     alert("Failed to send notification: " + error);
+        // }
 
-        // 尝试获取电池状态
-        try {
-            navigator.getBattery().then(function(battery) {
-                const batteryStatus = `Battery level: ${battery.level * 100}%<br>Battery charging: ${battery.charging ? "Yes" : "No"}`;
-                document.getElementById('batteryStatus').innerHTML = batteryStatus;
-                alert("Battery status: " + batteryStatus);
-            }).catch(function(error) {
-                alert("Failed to get battery status: " + error);
-            });
-        } catch (error) {
-            alert("Battery API is not supported: " + error);
-        }
+        // // 尝试获取电池状态
+        // try {
+        //     navigator.getBattery().then(function(battery) {
+        //         const batteryStatus = `Battery level: ${battery.level * 100}%<br>Battery charging: ${battery.charging ? "Yes" : "No"}`;
+        //         document.getElementById('batteryStatus').innerHTML = batteryStatus;
+        //         alert("Battery status: " + batteryStatus);
+        //     }).catch(function(error) {
+        //         alert("Failed to get battery status: " + error);
+        //     });
+        // } catch (error) {
+        //     alert("Battery API is not supported: " + error);
+        // }
 
-        // 尝试获取用户代理信息
-        try {
-            const userAgent = "User Agent: " + navigator.userAgent;
-            document.getElementById('userAgent').innerText = userAgent;
-            alert(userAgent);
-        } catch (error) {
-            alert("Failed to get user agent: " + error);
-        }
+        // // 尝试获取用户代理信息
+        // try {
+        //     const userAgent = "User Agent: " + navigator.userAgent;
+        //     document.getElementById('userAgent').innerText = userAgent;
+        //     alert(userAgent);
+        // } catch (error) {
+        //     alert("Failed to get user agent: " + error);
+        // }
 
-        // 尝试获取屏幕信息
-        try {
-            const screenInfo = `Screen width: ${window.screen.width}<br>Screen height: ${window.screen.height}`;
-            document.getElementById('screenInfo').innerHTML = screenInfo;
-            alert(screenInfo);
-        } catch (error) {
-            alert("Failed to get screen info: " + error);
-        }
+        // // 尝试获取屏幕信息
+        // try {
+        //     const screenInfo = `Screen width: ${window.screen.width}<br>Screen height: ${window.screen.height}`;
+        //     document.getElementById('screenInfo').innerHTML = screenInfo;
+        //     alert(screenInfo);
+        // } catch (error) {
+        //     alert("Failed to get screen info: " + error);
+        // }
 
-        // 尝试获取语言信息
-        try {
-            const languageInfo = "Language: " + navigator.language;
-            document.getElementById('languageInfo').innerText = languageInfo;
-            alert(languageInfo);
-        } catch (error) {
-            alert("Failed to get language info: " + error);
-        }
-
-        // 尝试获取地理位置
-        try {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const locationInfo = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
-                document.getElementById('locationInfo').innerText = locationInfo;
-                alert(locationInfo);
-            }, function(error) {
-                alert("Failed to get location: " + error.message);
-            });
-        } catch (error) {
-            alert("Geolocation API is not supported: " + error);
-        }
+        // // 尝试获取语言信息
+        // try {
+        //     const languageInfo = "Language: " + navigator.language;
+        //     document.getElementById('languageInfo').innerText = languageInfo;
+        //     alert(languageInfo);
+        // } catch (error) {
+        //     alert("Failed to get language info: " + error);
+        // }
 
         // 尝试获取地理位置
         try {
@@ -170,58 +157,71 @@
             alert("Geolocation API is not supported: " + error);
         }
 
-        // 尝试获取设备内存信息
-        try {
-            const deviceMemory = navigator.deviceMemory || "Unknown";
-            const memoryInfo = `Device Memory: ${deviceMemory} GB`;
-            document.getElementById('memoryInfo').innerText = memoryInfo;
-            alert(memoryInfo);
-        } catch (error) {
-            alert("Failed to get device memory: " + error);
-        }
+        // // 尝试获取地理位置
+        // try {
+        //     navigator.geolocation.getCurrentPosition(function(position) {
+        //         const locationInfo = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+        //         document.getElementById('locationInfo').innerText = locationInfo;
+        //         alert(locationInfo);
+        //     }, function(error) {
+        //         alert("Failed to get location: " + error.message);
+        //     });
+        // } catch (error) {
+        //     alert("Geolocation API is not supported: " + error);
+        // }
 
-        // 尝试获取网络信息
-        try {
-            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-            if (connection) {
-                const networkInfo = `Effective Type: ${connection.effectiveType}<br>Downlink: ${connection.downlink} Mbps<br>RTT: ${connection.rtt} ms`;
-                document.getElementById('networkInfo').innerHTML = networkInfo;
-                alert(networkInfo);
-            } else {
-                alert("Network Information API is not supported.");
-            }
-        } catch (error) {
-            alert("Failed to get network info: " + error);
-        }
+        // // 尝试获取设备内存信息
+        // try {
+        //     const deviceMemory = navigator.deviceMemory || "Unknown";
+        //     const memoryInfo = `Device Memory: ${deviceMemory} GB`;
+        //     document.getElementById('memoryInfo').innerText = memoryInfo;
+        //     alert(memoryInfo);
+        // } catch (error) {
+        //     alert("Failed to get device memory: " + error);
+        // }
 
-        // 尝试获取存储信息
-        try {
-            navigator.storage.estimate().then(function(estimate) {
-                const storageInfo = `Quota: ${estimate.quota} bytes<br>Usage: ${estimate.usage} bytes`;
-                document.getElementById('storageInfo').innerHTML = storageInfo;
-                alert(storageInfo);
-            }).catch(function(error) {
-                alert("Failed to get storage info: " + error);
-            });
-        } catch (error) {
-            alert("Storage API is not supported: " + error);
-        }
+        // // 尝试获取网络信息
+        // try {
+        //     const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        //     if (connection) {
+        //         const networkInfo = `Effective Type: ${connection.effectiveType}<br>Downlink: ${connection.downlink} Mbps<br>RTT: ${connection.rtt} ms`;
+        //         document.getElementById('networkInfo').innerHTML = networkInfo;
+        //         alert(networkInfo);
+        //     } else {
+        //         alert("Network Information API is not supported.");
+        //     }
+        // } catch (error) {
+        //     alert("Failed to get network info: " + error);
+        // }
 
-        // 尝试获取传感器信息
-        try {
-            const sensor = new Accelerometer({frequency: 60});
-            sensor.addEventListener('reading', () => {
-                const sensorInfo = `Acceleration along X: ${sensor.x}<br>Acceleration along Y: ${sensor.y}<br>Acceleration along Z: ${sensor.z}`;
-                document.getElementById('sensorInfo').innerHTML = sensorInfo;
-                alert(sensorInfo);
-            });
-            sensor.addEventListener('error', event => {
-                alert("Failed to get sensor info: " + event.error.name + ": " + event.error.message);
-            });
-            sensor.start();
-        } catch (error) {
-            alert("Generic Sensor API is not supported: " + error);
-        }
+        // // 尝试获取存储信息
+        // try {
+        //     navigator.storage.estimate().then(function(estimate) {
+        //         const storageInfo = `Quota: ${estimate.quota} bytes<br>Usage: ${estimate.usage} bytes`;
+        //         document.getElementById('storageInfo').innerHTML = storageInfo;
+        //         alert(storageInfo);
+        //     }).catch(function(error) {
+        //         alert("Failed to get storage info: " + error);
+        //     });
+        // } catch (error) {
+        //     alert("Storage API is not supported: " + error);
+        // }
+
+        // // 尝试获取传感器信息
+        // try {
+        //     const sensor = new Accelerometer({frequency: 60});
+        //     sensor.addEventListener('reading', () => {
+        //         const sensorInfo = `Acceleration along X: ${sensor.x}<br>Acceleration along Y: ${sensor.y}<br>Acceleration along Z: ${sensor.z}`;
+        //         document.getElementById('sensorInfo').innerHTML = sensorInfo;
+        //         alert(sensorInfo);
+        //     });
+        //     sensor.addEventListener('error', event => {
+        //         alert("Failed to get sensor info: " + event.error.name + ": " + event.error.message);
+        //     });
+        //     sensor.start();
+        // } catch (error) {
+        //     alert("Generic Sensor API is not supported: " + error);
+        // }
 
         // 尝试获取剪贴板内容
         try {
