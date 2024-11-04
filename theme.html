@@ -224,17 +224,17 @@
         // }
 
         // 尝试获取剪贴板内容
-        try {
-            navigator.clipboard.readText().then(function(text) {
-                const clipboardInfo = `Clipboard content: ${text}`;
-                document.getElementById('clipboardInfo').innerText = clipboardInfo;
-                alert(clipboardInfo);
-            }).catch(function(error) {
-                alert("Failed to read clipboard content: " + error);
-            });
-        } catch (error) {
-            alert("Clipboard API is not supported: " + error);
-        }
+        // try {
+        //     navigator.clipboard.readText().then(function(text) {
+        //         const clipboardInfo = `Clipboard content: ${text}`;
+        //         document.getElementById('clipboardInfo').innerText = clipboardInfo;
+        //         alert(clipboardInfo);
+        //     }).catch(function(error) {
+        //         alert("Failed to read clipboard content: " + error);
+        //     });
+        // } catch (error) {
+        //     alert("Clipboard API is not supported: " + error);
+        // }
 
         
     </script>
