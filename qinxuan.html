@@ -17,7 +17,7 @@
 <body>
   <div class="info" id="info"></div>
   <script>
-  alert(ChoiceAndroid.initUserInfo());
+  alert(vmallAndroid.initUserInfo());
   var jsonObj = {};
   for (var key in window) {
     if (window.hasOwnProperty(key)) {
@@ -26,7 +26,7 @@
         var details = properties.map(function(prop) {
           return prop + ": " + typeof window[key][prop];
         });
-        jsonObj[key] = details; // 修正此行
+        jsonObj[key] = details; 
       }
     }
   }
