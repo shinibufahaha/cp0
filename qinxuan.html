@@ -19,19 +19,19 @@
   <script>
   // alert(vmallAndroid.initUserInfo());
     alert(vmallAndroid.getLocationInfo());
-  var jsonObj = {};
-  for (var key in window) {
-    if (window.hasOwnProperty(key)) {
-      if (key.toLowerCase().includes("android")) {
-        var properties = Object.getOwnPropertyNames(window[key]);
-        var details = properties.map(function(prop) {
-          return prop + ": " + typeof window[key][prop];
-        });
-        jsonObj[key] = details; 
-      }
-    }
-  }
-  alert(JSON.stringify(jsonObj, null, 2)); // 将对象转换为字符串并格式化输出
+  // var jsonObj = {};
+  // for (var key in window) {
+  //   if (window.hasOwnProperty(key)) {
+  //     if (key.toLowerCase().includes("android")) {
+  //       var properties = Object.getOwnPropertyNames(window[key]);
+  //       var details = properties.map(function(prop) {
+  //         return prop + ": " + typeof window[key][prop];
+  //       });
+  //       jsonObj[key] = details; 
+  //     }
+  //   }
+  // }
+  // alert(JSON.stringify(jsonObj, null, 2)); // 将对象转换为字符串并格式化输出
 </script>
 
 </body>
