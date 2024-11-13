@@ -18,16 +18,26 @@
   <h1>JavaScript Interfaces Demo</h1>
   <div class="info" id="info"></div>
   <script>
-    // 访问一个网址并获取数据
-    fetch('https://www.baidu.com')
-      .then(response => response.json())
-      .then(data => {
-        // 在页面上显示获取到的数据
-        document.getElementById('info').innerText = JSON.stringify(data, null, 2);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
+    var xhr = new XMLHttpRequest();
+    
+    // 配置它：GET请求，URL为https://api.example.com/data
+    xhr.open('GET', 'https://www.baidu.com', true);
+    
+    // 设置回调函数
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) { // 请求完成
+        if (xhr.status === 200) { // 请求成功
+          var data = JSON.parse(xhr.responseText);
+          // 在页面上显示获取到的数据
+          document.getElementById('info').innerText = JSON.stringify(data, null, 2);
+        } else {
+          console.error('Error fetching data:', xhr.statusText);
+        }
+      }
+    };
+    
+    // 发送请求
+    xhr.send();
   </script>
 </body>
 </html>
