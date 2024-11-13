@@ -17,26 +17,20 @@
 <body>
   <div class="info" id="info"></div>
   <script>
-    var xhr = new XMLHttpRequest();
-    
-    // 配置它：GET请求，URL为https://api.example.com/data
-    xhr.open('GET', 'https://www.baidu.com', true);
-    
-    // 设置回调函数
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) { // 请求完成
-        if (xhr.status === 200) { // 请求成功
-          var data = JSON.parse(xhr.responseText);
-          // 在页面上显示获取到的数据
-          document.getElementById('info').innerText = JSON.stringify(data, null, 2);
-        } else {
-          console.error('Error fetching data:', xhr.statusText);
-        }
+  var jsonObj = {};
+  for (var key in window) {
+    if (window.hasOwnProperty(key)) {
+      if (key.toLowerCase().includes("local") || key.toLowerCase().includes("android")) {
+        var properties = Object.getOwnPropertyNames(window[key]);
+        var details = properties.map(function(prop) {
+          return prop + ": " + typeof window[key][prop];
+        });
+        jsonObj[key] = details; // 修正此行
       }
-    };
-    
-    // 发送请求
-    xhr.send();
-  </script>
+    }
+  }
+  alert(JSON.stringify(jsonObj, null, 2)); // 将对象转换为字符串并格式化输出
+</script>
+
 </body>
 </html>
