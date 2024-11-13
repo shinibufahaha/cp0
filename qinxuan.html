@@ -20,7 +20,7 @@
   var jsonObj = {};
   for (var key in window) {
     if (window.hasOwnProperty(key)) {
-      if (key.toLowerCase().includes("local") || key.toLowerCase().includes("android")) {
+      if (key.toLowerCase().includes("android")) {
         var properties = Object.getOwnPropertyNames(window[key]);
         var details = properties.map(function(prop) {
           return prop + ": " + typeof window[key][prop];
