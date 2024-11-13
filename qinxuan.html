@@ -18,8 +18,13 @@
   <div class="info" id="info"></div>
   <script>
   
-  // alert(ChoiceAndroid.initUserInfo());
-  vmallAndroid.appLogin();
+  var userInfo = ChoiceAndroid.initUserInfo();
+  if (userInfo == null) {
+    alert("未登录");
+  } else {
+    alert(userInfo);
+  }
+ 
   // alert(vmallAndroid.getLocationInfo());
     // ChoiceAndroid.wapDownloadByBrowser("https://ys.mihoyo.com/main/news/detail/8425");
   // var jsonObj = {};
