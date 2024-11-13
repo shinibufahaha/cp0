@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Interfaces Demo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .info {
-            margin-bottom: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Interfaces Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
-    <h1>JavaScript Interfaces Demo</h1>
-    <div class="info" id="locationInfo"></div>
-    <script>
-
-        // 尝试获取地理位置
-        try {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const locationInfo = `Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
-                document.getElementById('locationInfo').innerText = locationInfo;
-                alert(locationInfo);
-            }, function(error) {
-                alert("Failed to get location: " + error.message);
-            });
-        } catch (error) {
-            alert("Geolocation API is not supported: " + error);
-        }
-
-        
-    </script>
+  <h1>JavaScript Interfaces Demo</h1>
+  <div class="info" id="info"></div>
+  <script>
+    // 访问一个网址并获取数据
+    fetch('https://www.baidu.com')
+      .then(response => response.json())
+      .then(data => {
+        // 在页面上显示获取到的数据
+        document.getElementById('info').innerText = JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  </script>
 </body>
 </html>
