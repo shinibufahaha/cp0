@@ -36,8 +36,7 @@ for (var key in window) {
         var propDetails = window[key][prop];
         if (typeof propDetails === 'function') {
           // 获取函数签名
-          var funcSignature = propDetails.toString();
-          return funcSignature;
+          return prop;
         } else {
           return prop;
         }
