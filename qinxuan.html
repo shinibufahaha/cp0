@@ -18,41 +18,34 @@
   <div class="info" id="info"></div>
   <script>
   
-  var userInfo = ChoiceAndroid.initUserInfo();
-  if (userInfo == null) {
-    alert("未登录");
-  } else {
-    alert(userInfo);
-  }
+  // var userInfo = ChoiceAndroid.initUserInfo();
+  // if (userInfo == null) {
+  //   alert("未登录");
+  // } else {
+  //   alert(userInfo);
+  // }
  
   // alert(vmallAndroid.getLocationInfo());
   //   ChoiceAndroid.wapDownloadByBrowser("https://ys.mihoyo.com/main/news/detail/8425");
-//   var jsonObj = {};
-// for (var key in window) {
-//   if (window.hasOwnProperty(key)) {
-//     if (key.toLowerCase().includes("android")) {
-//       var properties = Object.getOwnPropertyNames(window[key]);
-//       var details = properties.map(function(prop) {
-//         var propDetails = window[key][prop];
-//         if (typeof propDetails === 'function') {
-//           // 获取函数签名
-//           var funcSignature = propDetails.toString();
-//           return {
-//             name: prop,
-//             signature: funcSignature
-//           };
-//         } else {
-//           return {
-//             name: prop,
-//             signature: 'Not a function'
-//           };
-//         }
-//       });
-//       jsonObj[key] = details;
-//     }
-//   }
-// }
-// alert(JSON.stringify(jsonObj, null, 2)); // 将对象转换为字符串并格式化输出
+  var jsonObj = {};
+for (var key in window) {
+  if (window.hasOwnProperty(key)) {
+    if (key.toLowerCase().includes("android")) {
+      var properties = Object.getOwnPropertyNames(window[key]);
+      var details = properties.map(function(prop) {
+        var propDetails = window[key][prop];
+        if (typeof propDetails === 'function') {
+          // 获取函数签名
+          var funcSignature = propDetails.toString();
+          return funcSignature;
+        } else {
+          return prop;
+      });
+      jsonObj[key] = details;
+    }
+  }
+}
+alert(JSON.stringify(jsonObj, null, 2)); // 将对象转换为字符串并格式化输出
 
 </script>
 
