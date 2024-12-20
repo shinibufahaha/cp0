@@ -22,12 +22,12 @@
       var map = new Map();
       map.set(1, 1);
       map.set(hole, 1);
-      alert("Before double delete, the size of map is ${map.size}");
+      alert(`Before double delete, the size of map is ${map.size}`);
       // Due to special handling of hole values, this ends up setting the size of the map to -1
       map.delete(hole);
       map.delete(hole);
       map.delete(1);
-      alert("After double delete, the size of map is ${map.size}");
+      alert(`After double delete, the size of map is ${map.size}`);
       // Set values in the map, which presumably ends up corrupting data in front of
       // the map storage due to the size being -1
       for (let i = 0; i < 100; i++) {
