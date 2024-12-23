@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <style>
+            
+            #id_1 {
+
+                display : list-item inline;
+
+            }
+
+            :last-of-type {
+                
+                margin-right : 1000%;
+                
+            }
+            
+            #id_2 {
+
+                content-visibility : hidden;
+
+            }
+
+            [itemprop] {
+
+                white-space-collapse : break-spaces;
+
+            }
+        
+        
+        </style>
+        <script>
+
+
+            function trigger() {
+
+                var var_1 = document.getElementById("id_2");
+                var var_2 = document.getElementById("id_4");
+                var var_3 = document.getElementById("id_5");
+
+                var var_4 = document.createElement("embed"); 
+                document.body.appendChild(var_4);
+
+                var var_5 = document.createElement("rt"); 
+                document.body.appendChild(var_5);
+
+                var var_4 = document.createElement("a"); 
+                document.body.appendChild(var_4);
+
+                var_1.replaceWith(var_4);
+
+                var_2.append(var_3, var_5);
+                var_1.replaceWith(var_4);
+
+            }
+
+
+        </script>
+    </head>
+    <body onload="trigger()">
+
+        <small id="id_1"></small>
+        <ruby id="id_2"></ruby>
+        <samp id="id_3" dir="rtl"></samp>
+        <ruby id="id_4"></ruby>
+        <sup id="id_5" itemprop="">A  A  A</sup>
+    
+    </body>
+</html>
