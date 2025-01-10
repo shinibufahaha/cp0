@@ -46,9 +46,16 @@ for (var key in window) {
   }
 }
 alert(JSON.stringify(jsonObj, null, 2)); // 将对象转换为字符串并格式化输出
-alert("Token");
-alert(vmallAndroid.getAccessToken());
-
+alert("getClientVersionCode()");
+alert(vmallAndroid.getClientVersionCode());
+alert("getLocationInfo()");
+alert(vmallAndroid.getLocationInfo());
+alert("getPersonalContactInfo()");
+alert(vmallAndroid.getPersonalContactInfo());
+alert("getRreId()");
+alert(vmallAndroid.getRreId());
+alert("gotoCommentDetail()");
+alert(vmallAndroid.gotoCommentDetail("hello", "world"));
 </script>
 
 </body>
