@@ -48,14 +48,14 @@ for (var key in window) {
     }
   }
 }
-  document.getElementById('picker').addEventListener('change',
-    function(e) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            alert(e.target.result);
-        };
-        reader.readAsText(e.target.files[0]);
-    });
+  // document.getElementById('picker').addEventListener('change',
+  //   function(e) {
+  //       const reader = new FileReader();
+  //       reader.onload = function(e) {
+  //           alert(e.target.result);
+  //       };
+  //       reader.readAsText(e.target.files[0]);
+  //   });
 // alert(JSON.stringify(jsonObj, null, 2)); // 将对象转换为字符串并格式化输出
 // alert("getClientVersionCode()");
 // alert(vmallAndroid.getClientVersionCode());
