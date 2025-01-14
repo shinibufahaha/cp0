@@ -31,7 +31,8 @@
   var jsonObj = {};
 for (var key in window) {
   if (window.hasOwnProperty(key)) {
-    if (key.toLowerCase().includes("android") || key.toLowerCase().includes("qx") || key.toLowerCase().includes("js")) {
+	let key_l = key.toLowerCase();
+    if (key.toLowerCase().includes("android") || key.toLowerCase().includes("qx") || key.toLowerCase().includes("js") || key_l.includes("honor") || key_l.includes("java")) {
       var properties = Object.getOwnPropertyNames(window[key]);
       var details = properties.map(function(prop) {
         var propDetails = window[key][prop];
