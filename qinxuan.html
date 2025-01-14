@@ -31,7 +31,7 @@
   var jsonObj = {};
 for (var key in window) {
   if (window.hasOwnProperty(key)) {
-    if (key.toLowerCase().includes("android") || key.toLowerCase().includes("qx")) {
+    if (key.toLowerCase().includes("android") || key.toLowerCase().includes("qx") || key.toLowerCase().includes("js")) {
       var properties = Object.getOwnPropertyNames(window[key]);
       var details = properties.map(function(prop) {
         var propDetails = window[key][prop];
