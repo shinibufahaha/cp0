@@ -6,6 +6,27 @@
     <title>Honor AiHuiShou Page</title>
 </head>
 <body>
+var jsonObj = {};
+for (var key in window) {
+  if (window.hasOwnProperty(key)) {
+        let key_l = key.toLowerCase();
+    if (key.toLowerCase().includes("android") || key.toLowerCase().includes("qx") || key.toLowerCase().includes("js") || key_l.includes("honor") || key_l.includes("java")) {
+      var properties = Object.getOwnPropertyNames(window[key]);
+      var details = properties.map(function(prop) {
+        var propDetails = window[key][prop];
+        if (typeof propDetails === 'function') {
+          // 获取函数签名
+          return prop;
+        } else {
+          return prop;
+        }
+      });
+      jsonObj[key] = details;
+    }
+  }
+}
+
+alert(JSON.stringify(jsonObj, null, 2)); // 将对象转换为字符串并格式化输出
     <h1>Welcome to Honor AiHuiShou Page</h1>
     <p>Please enter your honor account and password</p>
 </body>
