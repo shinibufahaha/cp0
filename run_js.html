@@ -18,12 +18,12 @@
 <body>
   <div class="info" id="info"></div>
   <script>
-    function MyCallBack(callbackId, eventType, data, d, e) {
+    function MyCallback(callbackId, eventType, data, d, e) {
       alert(JSON.stringify(data));
   } 
     window.Native.nativeMethod("com.hihonor.hm.h5.container.js.method.DeviceMethods", "getAppDeviceInfo", "", "", "MyCallback");
 
-
+  
 // alert("getLocationInfo()");
 // alert(vmallAndroid.getLocationInfo());
 // alert("getPersonalContactInfo()");
