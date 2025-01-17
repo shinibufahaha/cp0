@@ -18,25 +18,14 @@
 <body>
   <div class="info" id="info"></div>
   <script>
-    Native.nativeMethod("", "getAppDeviceInfo", "", "", "handleScreenShotCallback");
-//   function callGetAppDeviceInfo() {
-//     var clazz = "com.hihonor.hm.h5.container.js.method.DeviceMethods";
-//     var method = "getAppDeviceInfo";
-//     var args = JSON.stringify({
-//       "appId": "com.hihonor.hms",
-//       "appVersion": "1.0.0",
-//       "appChannel": "hms",
-//       "appPackageName": "com.hihonor.hms"
-//     });
-//     var requestId = "12345";
-//     var callback = "handleScreenShotCallback";
-//   }
+    window.Native.nativeMethod("com.hihonor.hm.h5.container.js.method.DeviceMethods", "getAppDeviceInfo", "", "", "MyCallback");
 
-function handleScreenShotCallBack(callbackId, eventType, data, d, e) {
+
+function MyCallBack(callbackId, eventType, data, d, e) {
   alert("Callback: " + callbackId + " " + eventType + " " + JSON.stringify(data) + " " + d + " " + e);
 }
 
-// callGetAppDeviceInfo();
+
 // alert("getLocationInfo()");
 // alert(vmallAndroid.getLocationInfo());
 // alert("getPersonalContactInfo()");
