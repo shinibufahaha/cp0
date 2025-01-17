@@ -19,7 +19,7 @@
   <div class="info" id="info"></div>
   <script>
     function MyCallback(callbackId, eventType, data, d, e) {
-      alert(JSON.stringify(data));
+      alert(data);
   } 
     window.Native.nativeMethod("com.hihonor.hm.h5.container.js.method.DeviceMethods", "getAppDeviceInfo", "", "", "MyCallback");
 
