@@ -19,6 +19,7 @@
   <div class="info" id="info"></div>
   <script>
     function MyCallback(callbackId, eventType, data, d, e) {
+      alert("MyCallback");
       alert("callbackId: " + callbackId + " eventType: " + eventType + " data: " + JSON.stringify(data) + " d: " + d + " e: " + e);
       //alert(JSON.stringify(data));
   } 
