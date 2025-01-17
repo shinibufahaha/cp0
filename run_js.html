@@ -18,20 +18,30 @@
 <body>
   <div class="info" id="info"></div>
   <script>
-  
-
+  function callGetAppDeviceInfo() {
+    var clazz = "com.hihonor.hm.h5.container.js.method.DeviceMethods";
+    var method = "getAppDeviceInfo";
+    var args = JSON.stringify({
+      "appId": "com.hihonor.hms",
+      "appVersion": "1.0.0",
+      "appChannel": "hms",
+      "appPackageName": "com.hihonor.hms"
+    });
+    var requestId = "12345";
+    var callback = "handleScreenShotCallback";
+  }
 
 
 // alert("getLocationInfo()");
 // alert(vmallAndroid.getLocationInfo());
 // alert("getPersonalContactInfo()");
 // alert(vmallAndroid.getPersonalContactInfo());
-alert("going to run logJsResult");
-nbsJsBridge.logJsResult("honor steal your personal info");
-alert("parseArguments");
-alert(nbsJsBridge.parseArguments("test"));
-alert("DOS ATTACK: gotoCommentDetail()");
-alert(vmallAndroid.gotoCommentDetail("hello", "world"));
+//alert("going to run logJsResult");
+//nbsJsBridge.logJsResult("honor steal your personal info");
+//alert("parseArguments");
+//alert(nbsJsBridge.parseArguments("test"));
+//alert("DOS ATTACK: gotoCommentDetail()");
+//alert(vmallAndroid.gotoCommentDetail("hello", "world"));
 </script>
 
 </body>
