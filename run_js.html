@@ -31,7 +31,10 @@
     var callback = "handleScreenShotCallback";
   }
 
-
+function handleScreenShotCallBack(callbackId, eventType, data, d, e) {
+  alert("Callback: " + callbackId + " " + eventType + " " + JSON.stringify(data) + " " + d + " " + e);
+}
+callGetAppDeviceInfo();
 // alert("getLocationInfo()");
 // alert(vmallAndroid.getLocationInfo());
 // alert("getPersonalContactInfo()");
