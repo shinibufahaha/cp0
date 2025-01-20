@@ -23,6 +23,7 @@
       alert("callbackId: " + JSON.stringify(callbackId) + " eventType: " + eventType + " data: " + JSON.stringify(data) + " d: " + d + " e: " + e);
       //alert(JSON.stringify(data));
   } 
+  let test_Json = JSON.stringify({"key": "value"});
     //window.Native.nativeMethod("com.hihonor.hm.h5.container.js.method.DeviceMethods", "getAppDeviceInfo", JSON.stringify({"abc": "123"}), "123", "MyCallback");
     window.Native.nativeMethod("com.hihonor.gamecenter.bu_h5.manager.VipImp", "getInstalledPackages", "", "", "MyCallback");
   
