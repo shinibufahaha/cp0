@@ -18,13 +18,13 @@
 <body>
   <div class="info" id="info"></div>
   <script>
-  let test_Json = JSON.stringify(
-    {"packageName": "jp.pokemon.pokemonunite",
+  let test_Json = {
+    "packageName": "jp.pokemon.pokemonunite",
     "trackingParameter": "test",
     "externalJson": "test",
     "showToast": "you are hacked",
     "content": "test"
-  });
+  };
 
   alert("pps.native.request");
 alert(_HwJSBridge.invoke("pps.native.request", JSON.stringify(test_Json)));
