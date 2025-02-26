@@ -19,7 +19,6 @@
   <div class="info" id="info"></div>
   <script>
     function MyCallback(callbackId, eventType, data, d, e) {
-      alert("MyCallback");
       alert("callbackId: " + JSON.stringify(callbackId) + " eventType: " + eventType + " data: " + JSON.stringify(data) + " d: " + d + " e: " + e);
       //alert(JSON.stringify(data));
   } 
@@ -27,9 +26,11 @@
     {"packageName": "jp.pokemon.pokemonunite",
     "trackingParameter": "test",
     "externalJson": "test",
-    "showToast": "you are hacked"
+    "showToast": "you are hacked",
+     "phoneNum": "10086"
   });
     window.Native.nativeMethod("com.hihonor.hm.h5.container.js.method.DeviceMethods", "getAppDeviceInfo", test_Json, "1", "MyCallback");
+    window.Native.nativeMethod("com.hihonor.wallet.business.loan.core.WalletLoanJSImpl", "callPhone", test_Json, "1", "MyCallback");
     //window.Native.nativeMethod("com.hihonor.gamecenter.bu_h5.manager.VipImp", "getInstalledPackages", "", "", "MyCallback");
     //window.Native.nativeMethod("com.hihonor.gamecenter.bu_h5.manager.AppOperateImp", "downloadButtonOnClick", test_Json, "2", "MyCallback");
     //window.Native.nativeMethod("com.hihonor.hm.h5.network2c.NetworkMethods2C", "getToken", test_Json, "3", "MyCallback");
