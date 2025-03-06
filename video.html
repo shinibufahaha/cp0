@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+
+    window.onload = function() {
+      if (window.__windvane__) {
+        alert("test");
+        window.__windvane__.onSuccess = function(callbackFunction, data) {
+          alert("data " + JSON.stringify(data));
+        } 
+      }
+    }
+  
+
+  var params = {
+        // 是否获取高精度的位置
+        enableHighAccuracy: true,
+        // 是否获取地址描述
+        address: true
+};
+
+function successCallback(e) {
+    alert('success:' + JSON.stringify(e));
+}
+function failureCallback(e) {
+    alert('failure:' + JSON.stringify(e));
+}
+window.__windvane__.nativeCall('WVLocation.getLocation', JSON.stringify(params), "successCallback", "failureCallback");
+ //window.__windvane__.nativeCall('WVLocation.requestLocation', JSON.stringify(params), "successCallback", "failureCallback");
+
+// write file
+var file_params = {
+  "mode": "overwrite",
+  "data": "123",
+  "fileName": "test.txt",
+  "share": true,
+}
+//window.__windvane__.nativeCall('WVFile.write', JSON.stringify(file_params), "successCallback", "failureCallback");
+
+
+
+
+// jieping
+// var jieping_params = {
+//   inAlbum: true
+// };
+// window.__windvane__.nativeCall('WVScreen.capture', JSON.stringify(jieping_params), "successCallback", "failureCallback");
+
+
+
+
+// blue_tooth_params
+// var blue_tooth_params = {
+//   deviceId: "123",
+//   serviceId: "123",
+// }
+// window.__windvane__.nativeCall('WVBluetooth.writeValue', JSON.stringify(blue_tooth_params), "successCallback", "failureCallback");
+</script>
+
+</body>
+</html>
