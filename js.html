@@ -26,7 +26,7 @@
   "oncuechange", "ondblclick", "ondrag", "ondragend", "ondragenter", "ondragleave", "ondragover", "ondragstart", "ondrop", "ondurationchange", "onemptied", "onended", "onerror", "onfocus", "onformdata", "oninput", "oninvalid", "onkeydown", "onkeypress", "onkeyup", "onload", "onloadeddata",
   "onloadedmetadata", "onloadstart", "onmousedown", "onmouseenter", "onmouseleave", "onmousemove", "onmouseout", "onmouseover", "onmouseup", "onmousewheel", "onpause", "onplay", "onplaying", "onprogress", "onratechange", "onreset", "onresize", "onscroll", "onsecuritypolicyviolation", "onseeked", "onseeking", "onselect", "onslotchange", "onstalled", "onsubmit", "onsuspend", "ontimeupdate", "ontoggle", "onvolumechange", "onwaiting", "onwebkitanimationend", "onwebkitanimationiteration", "onwebkitanimationstart", "onwebkittransitionend", "onwheel", "onauxclick", "ongotpointercapture", "onlostpointercapture", "onpointerdown", "onpointermove", "onpointerrawupdate", "onpointerup", "onpointercancel", "onpointerover", "onpointerout", "onpointerenter", "onpointerleave", "onselectstart", "onselectionchange", "onanimationend", "onanimationiteration", "onanimationstart", "ontransitionrun", "ontransitionstart", "ontransitionend", "ontransitioncancel",
   "onafterprint", "onbeforeprint", "onbeforeunload", "onhashchange", "onlanguagechange", "onmessage", "onmessageerror", "onoffline", "ononline", "onpagehide", "onpageshow", "onpopstate", "onrejectionhandled", "onstorage", "onunhandledrejection", "onunload",
-  "crossOriginIsolated", "scheduler", "alert", "atob", "blur", "btoa", "cancelAnimationFrame", "cancelIdleCallback", "captureEvents", "clearInterval", "clearTimeout", "close", "confirm", "createImageBitmap", "fetch", "find", "focus", "getComputedStyle", "getSelection", "matchMedia", "moveBy", "moveTo", "open", "postMessage", "print", "prompt", "queueMicrotask", "releaseEvents", "reportError", "requestAnimationFrame", "requestIdleCallback", "resizeBy", "resizeTo", "scroll", "scrollBy", "scrollTo", "setInterval", "setTimeout", "stop", "structuredClone", "webkitCancelAnimationFrame", "webkitRequestAnimationFrame", "originAgentCluster", "onorientationchange", "orientation", "onpageswap", "onpagereveal", "credentialless", "onscrollend", "onscrollsnapchange", "onscrollsnapchanging", "ontouchcancel", "ontouchend", "ontouchmove", "ontouchstart", "openDatabase", "jsonObj", "list", "key"
+  "crossOriginIsolated", "scheduler", "alert", "atob", "blur", "btoa", "cancelAnimationFrame", "cancelIdleCallback", "captureEvents", "clearInterval", "clearTimeout", "close", "confirm", "createImageBitmap", "fetch", "find", "focus", "getComputedStyle", "getSelection", "matchMedia", "moveBy", "moveTo", "open", "postMessage", "print", "prompt", "queueMicrotask", "releaseEvents", "reportError", "requestAnimationFrame", "requestIdleCallback", "resizeBy", "resizeTo", "scroll", "scrollBy", "scrollTo", "setInterval", "setTimeout", "stop", "cache", "cookieStore", "getScreenDetails", "ondevicemotion", "ondeviceorientation", "ondeviceorientationabsolute", "structuredClone", "webkitCancelAnimationFrame", "webkitRequestAnimationFrame", "originAgentCluster", "onorientationchange", "orientation", "onpageswap", "onpagereveal", "credentialless", "onscrollend", "onscrollsnapchange", "onscrollsnapchanging", "ontouchcancel", "ontouchend", "ontouchmove", "ontouchstart", "openDatabase", "jsonObj", "list", "key"
 ];
 
   var jsonObj = {};
@@ -40,12 +40,7 @@ for (var key in window) {
         var properties = Object.getOwnPropertyNames(window[key]);
         var details = properties.map(function(prop) {
           var propDetails = window[key][prop];
-          if (typeof propDetails === 'function') {
-            // 获取函数签名
-            return prop;
-          } else {
-            return prop;
-          }
+          return prop;
         });
         jsonObj[key] = details;
       } catch (e) {
