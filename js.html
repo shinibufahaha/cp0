@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<a href="https://www.github.com", >www.honor.com</a>
+<a href="https://www.github.com">www.honor.com</a>
   <div class="info" id="info"></div>
   <script>
 
@@ -31,28 +31,32 @@
 
   var jsonObj = {};
   var list = [];
-
 for (var key in window) {
   if (window.hasOwnProperty(key)) {
-        let key_l = key.toLowerCase();
+    let key_l = key.toLowerCase();
 
-    if (!js_white_list.includes(key) && key != "jsonObj" && key != "list" && key != "key" && key != "js_white_list" && key != "details" && key != "properties" && key != "propDetails") {
-      var properties = Object.getOwnPropertyNames(window[key]);
-      var details = properties.map(function(prop) {
-        var propDetails = window[key][prop];
-        if (typeof propDetails === 'function') {
-          // 获取函数签名
-          return prop;
-        } else {
-          return prop;
-        }
-      });
-      jsonObj[key] = details;
+    if (!js_white_list.includes(key) && key !== "jsonObj" && key !== "list" && key !== "key" && key !== "js_white_list" && key !== "details" && key !== "properties" && key !== "propDetails") {
+      try {
+        var properties = Object.getOwnPropertyNames(window[key]);
+        var details = properties.map(function(prop) {
+          var propDetails = window[key][prop];
+          if (typeof propDetails === 'function') {
+            // 获取函数签名
+            return prop;
+          } else {
+            return prop;
+          }
+        });
+        jsonObj[key] = details;
+      } catch (e) {
+        // Handle the error if window[key] is not an object
+       alert(`Error accessing properties of ${key}: ${e.message}`);
+      }
     }
   }
 }
-    
 alert(JSON.stringify(jsonObj, null, 2));
+    
 
 </script>
 
