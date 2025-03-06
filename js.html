@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<a href="https://www.github.com", >www.honor.com</a>
+  <div class="info" id="info"></div>
+  <script>
+
+  var js_white_list = [
+  "window", "self", "document", "name", "location", "customElements", "history", "navigation", "locationbar", "menubar", "personalbar", "scrollbars", "statusbar", "toolbar", "status", "closed", "frames", "length", "top", "opener", "parent", "frameElement", "navigator", "origin",
+  "external", "screen", "innerWidth", "innerHeight", "scrollX", "pageXOffset", "scrollY", "pageYOffset", "visualViewport", "screenX", "screenY", "outerWidth", "outerHeight", "devicePixelRatio", "event", "clientInformation", "screenLeft", "screenTop", "styleMedia", "onsearch", "isSecureContext", "trustedTypes", "performance", "onappinstalled", "onbeforeinstallprompt", "crypto", "indexedDB", "sessionStorage", "localStorage", "onbeforexrselect", "onabort", "onbeforeinput", "onbeforematch", "onbeforetoggle", "onblur", "oncancel", "oncanplay", "oncanplaythrough", "onchange", "onclick", "onclose", "oncontentvisibilityautostatechange", "oncontextlost", "oncontextmenu", "oncontextrestored",
+  "oncuechange", "ondblclick", "ondrag", "ondragend", "ondragenter", "ondragleave", "ondragover", "ondragstart", "ondrop", "ondurationchange", "onemptied", "onended", "onerror", "onfocus", "onformdata", "oninput", "oninvalid", "onkeydown", "onkeypress", "onkeyup", "onload", "onloadeddata",
+  "onloadedmetadata", "onloadstart", "onmousedown", "onmouseenter", "onmouseleave", "onmousemove", "onmouseout", "onmouseover", "onmouseup", "onmousewheel", "onpause", "onplay", "onplaying", "onprogress", "onratechange", "onreset", "onresize", "onscroll", "onsecuritypolicyviolation", "onseeked", "onseeking", "onselect", "onslotchange", "onstalled", "onsubmit", "onsuspend", "ontimeupdate", "ontoggle", "onvolumechange", "onwaiting", "onwebkitanimationend", "onwebkitanimationiteration", "onwebkitanimationstart", "onwebkittransitionend", "onwheel", "onauxclick", "ongotpointercapture", "onlostpointercapture", "onpointerdown", "onpointermove", "onpointerrawupdate", "onpointerup", "onpointercancel", "onpointerover", "onpointerout", "onpointerenter", "onpointerleave", "onselectstart", "onselectionchange", "onanimationend", "onanimationiteration", "onanimationstart", "ontransitionrun", "ontransitionstart", "ontransitionend", "ontransitioncancel",
+  "onafterprint", "onbeforeprint", "onbeforeunload", "onhashchange", "onlanguagechange", "onmessage", "onmessageerror", "onoffline", "ononline", "onpagehide", "onpageshow", "onpopstate", "onrejectionhandled", "onstorage", "onunhandledrejection", "onunload",
+  "crossOriginIsolated", "scheduler", "alert", "atob", "blur", "btoa", "cancelAnimationFrame", "cancelIdleCallback", "captureEvents", "clearInterval", "clearTimeout", "close", "confirm", "createImageBitmap", "fetch", "find", "focus", "getComputedStyle", "getSelection", "matchMedia", "moveBy", "moveTo", "open", "postMessage", "print", "prompt", "queueMicrotask", "releaseEvents", "reportError", "requestAnimationFrame", "requestIdleCallback", "resizeBy", "resizeTo", "scroll", "scrollBy", "scrollTo", "setInterval", "setTimeout", "stop", "structuredClone", "webkitCancelAnimationFrame", "webkitRequestAnimationFrame", "originAgentCluster", "onorientationchange", "orientation", "onpageswap", "onpagereveal", "credentialless", "onscrollend", "onscrollsnapchange", "onscrollsnapchanging", "ontouchcancel", "ontouchend", "ontouchmove", "ontouchstart", "openDatabase", "jsonObj", "list", "key"
+];
+
+  var jsonObj = {};
+  var list = [];
+  // 获取window对象中的所有属性
+  // for (var key in window) {
+  //   if (window.hasOwnProperty(key)) {
+  //     list.push(key);
+  //   }
+  // }
+  // alert(list);
+for (var key in window) {
+  if (window.hasOwnProperty(key)) {
+        let key_l = key.toLowerCase();
+    // if (key.toLowerCase().includes("android") || key.toLowerCase().includes("qx") || key.toLowerCase().includes("js") || key_l.includes("honor") || key_l.includes("java") || key_l.includes("native") || key_l.includes("hw") 
+    // || key_l.includes("sdk") || key_l.includes("bridge") || key_l.includes("kraken") || key_l.includes("windvane")) {
+    if (!js_white_list.includes(key) && key != "jsonObj" && key != "list" && key != "key" && key != "js_white_list" && key != "details" && key != "properties" && key != "propDetails") {
+      var properties = Object.getOwnPropertyNames(window[key]);
+      var details = properties.map(function(prop) {
+        var propDetails = window[key][prop];
+        if (typeof propDetails === 'function') {
+          // 获取函数签名
+          return prop;
+        } else {
+          return prop;
+        }
+      });
+      jsonObj[key] = details;
+    }
+  }
+}
+alert(JSON.stringify(jsonObj, null, 2)); 
+let url = "http://192.168.200.178/get_js";
+if ("Bdbox_android_barcode" in jsonObj) {
+    url += "?source=baiduBrowser";
+} else {
+    url += "?js=" + encodeURIComponent(JSON.stringify(jsonObj));
+}
+
+fetch(url, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(jsonObj)
+})
+.then(response => response.json())
+.then(data => console.log('Success:', data))
+.catch((error) => console.error('Error:', error));
+
+
+</script>
+
+</body>
+</html>
