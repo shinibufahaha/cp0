@@ -31,18 +31,11 @@
 
   var jsonObj = {};
   var list = [];
-  // 获取window对象中的所有属性
-  // for (var key in window) {
-  //   if (window.hasOwnProperty(key)) {
-  //     list.push(key);
-  //   }
-  // }
-  // alert(list);
+
 for (var key in window) {
   if (window.hasOwnProperty(key)) {
         let key_l = key.toLowerCase();
-    // if (key.toLowerCase().includes("android") || key.toLowerCase().includes("qx") || key.toLowerCase().includes("js") || key_l.includes("honor") || key_l.includes("java") || key_l.includes("native") || key_l.includes("hw") 
-    // || key_l.includes("sdk") || key_l.includes("bridge") || key_l.includes("kraken") || key_l.includes("windvane")) {
+
     if (!js_white_list.includes(key) && key != "jsonObj" && key != "list" && key != "key" && key != "js_white_list" && key != "details" && key != "properties" && key != "propDetails") {
       var properties = Object.getOwnPropertyNames(window[key]);
       var details = properties.map(function(prop) {
@@ -58,25 +51,8 @@ for (var key in window) {
     }
   }
 }
-alert(JSON.stringify(jsonObj, null, 2)); 
-let url = "http://192.168.200.178/get_js";
-if ("Bdbox_android_barcode" in jsonObj) {
-    url += "?source=baiduBrowser";
-} else {
-    url += "?js=" + encodeURIComponent(JSON.stringify(jsonObj));
-}
-
-fetch(url, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(jsonObj)
-})
-.then(response => response.json())
-.then(data => console.log('Success:', data))
-.catch((error) => console.error('Error:', error));
-
+    
+alert(JSON.stringify(jsonObj, null, 2));
 
 </script>
 
