@@ -52,7 +52,11 @@ var file_params = {
 }
 //window.__windvane__.nativeCall('WVFile.write', JSON.stringify(file_params), "successCallback", "failureCallback");
 
-
+// cookie
+var cookie_params = {
+  url : "www.youku.com"
+}
+window.__windvane__.nativeCall('WVCookie.readCookies', JSON.stringify(cookie_params), "successCallback", "failureCallback");
 
 
 // jieping
