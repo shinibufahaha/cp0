@@ -29,11 +29,13 @@
     function callBack(token) {
       alert(token)
     }
-alert(window.lives.getAppExists("jp.pokemon.pokemonunite"))
-alert(window.lives.getAppExists("com.huawei.lives"))
-alert(window.lives.getAccount("test"))
-alert(window.lives.getTokenVerifyUrl())
-alert(window.hwlives.getWebToken(true, "callBack"))
+// alert(window.lives.getAppExists("jp.pokemon.pokemonunite"))
+// alert(window.lives.getAppExists("com.huawei.lives"))
+// alert(window.lives.getAccount("test"))
+// alert(window.lives.getTokenVerifyUrl())
+
+alert("encryptWebStr: " + window.hwlives.encryptWebStr("test"))
+alert("getWebToken " + window.hwlives.getWebToken(true, "callBack"))
 
 
 </script>
