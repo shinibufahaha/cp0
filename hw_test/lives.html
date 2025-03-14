@@ -34,8 +34,30 @@
 // alert(window.lives.getAccount("test"))
 // alert(window.lives.getTokenVerifyUrl())
 
-alert("encryptWebStr: " + window.hwlives.encryptWebStr("test"))
-alert("getWebToken " + window.hwlives.getWebToken(true, "callBack"))
+alert("decryptWebStr: " + window.hwlives.decryptWebStr("test"));
+alert("encryptWebStr: " + window.hwlives.encryptWebStr("test"));
+alert("getDistributePosId: " + window.hwlives.getDistributePosId());
+alert("getEnv: " + window.hwlives.getEnv());
+alert("getGroupTypeForTeddy: " + window.hwlives.getGroupTypeForTeddy());
+alert("getHotWordPosId: " + window.hwlives.getHotWordPosId());
+alert("getLoginStatusForTeddy: " + window.hwlives.getLoginStatusForTeddy());
+alert("getNotificationStatus(0): " + window.hwlives.getNotificationStatus(0));
+alert("getOaidForTeddy: " + window.hwlives.getOaidForTeddy());
+alert("getRebateConfigForTeddy: " + window.hwlives.getRebateConfigForTeddy());
+alert("getUserIdForTeddy: " + window.hwlives.getUserIdForTeddy());
+alert("getUserTraceIdForTeddy: " + window.hwlives.getUserTraceIdForTeddy());
+alert("getVisibleRect: " + window.hwlives.getVisibleRect());
+window.hwlives.getWebToken(true, "callBack");
+alert("isAPPAvailable: " + window.hwlives.isAPPAvailable("appName", "appUrl"));
+alert("isNightMode: " + window.hwlives.isNightMode());
+window.hwlives.jumpActivity(1, "activityData");
+window.hwlives.jumpActivity(2, JSON.stringify({ jumpSearchKeyWord: "keyword", cpId: "123" }));
+alert("openNotification(1): " + window.hwlives.openNotification(1));
+alert("pullCoupons: " + window.hwlives.pullCoupons());
+window.hwlives.setAppBarRightButton(JSON.stringify({ buttonText: "Right Button", action: "actionName" }));
+alert("startService: " + window.hwlives.startService("serviceName"));
+alert("transferPage(0): " + window.hwlives.transferPage(0, "pageData"));
+
 
 
 </script>
