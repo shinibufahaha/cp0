@@ -16,6 +16,30 @@
   <button id="windvane_screenshot">windvane截屏</button>
   
   <script>
+    function successCallback(e) {
+    alert('success:' + JSON.stringify(e));
+}
+function failureCallback(e) {
+    alert('failure:' + JSON.stringify(e));
+}
+    window.onload = function() {
+      if (window.__windvane__) {
+        //alert("test");
+        window.__windvane__.onSuccess = function(callbackFunction, data) {
+          alert("data " + JSON.stringify(data));
+        } 
+      }
+    }
+
+    var params = {
+        // 是否获取高精度的位置
+        enableHighAccuracy: true,
+        // 是否获取地址描述
+        address: true
+};
+
+    window.__windvane__.nativeCall('WVLocation.getLocation', JSON.stringify(params), "successCallback", "failureCallback");
+    
     function ready(callback) {
       // 如果jsbridge已经注入则直接调用
       if (window.AlipayJSBridge) {
