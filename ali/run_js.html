@@ -30,6 +30,17 @@ function failureCallback(e) {
         } 
       }
     }
+  // document.querySelector('#kvInterface_getAll').addEventListener('click', function() {
+  //       alert(kvInterface.getAll());
+  // });
+
+  document.querySelector('#windvane_screenshot').addEventListener('click', function() {
+      var jieping_params = {
+         inAlbum: true
+        };
+     window.__windvane__.nativeCall('WVScreen.capture', JSON.stringify(jieping_params), "successCallback", "failureCallback");
+  });
+
 
 //     var params = {
 //         // 是否获取高精度的位置
@@ -40,67 +51,57 @@ function failureCallback(e) {
 
 //     window.__windvane__.nativeCall('WVLocation.getLocation', JSON.stringify(params), "successCallback", "failureCallback");
     
-    function ready(callback) {
-      // 如果jsbridge已经注入则直接调用
-      if (window.AlipayJSBridge) {
-        callback && callback();
-      } else {
-        // 如果没有注入则监听注入的事件
-        document.addEventListener('AlipayJSBridgeReady', callback, false);
-      }
-    }
+  //   function ready(callback) {
+  //     // 如果jsbridge已经注入则直接调用
+  //     if (window.AlipayJSBridge) {
+  //       callback && callback();
+  //     } else {
+  //       // 如果没有注入则监听注入的事件
+  //       document.addEventListener('AlipayJSBridgeReady', callback, false);
+  //     }
+  //   }
 
-    ready(function() {
-      document.getElementById('vibrate').addEventListener('click', function() {
-        AlipayJSBridge.call('vibrate');
-      });
+  //   ready(function() {
+  //     document.getElementById('vibrate').addEventListener('click', function() {
+  //       AlipayJSBridge.call('vibrate');
+  //     });
 
-      document.getElementById('exitButton').addEventListener('click', function() {
-        AlipayJSBridge.call('exitApp');
-      });
+  //     document.getElementById('exitButton').addEventListener('click', function() {
+  //       AlipayJSBridge.call('exitApp');
+  //     });
 
-      document.getElementById('getCurrentLocation').addEventListener('click', function() {
-         AlipayJSBridge.call('getCurrentLocation', { requestType: 3, bizType: "test" }, function(result) {
-          if (result.error) {
-            alert(result.errorMessage);
-            return;
-          }
-          alert(JSON.stringify(result));
-        });
-      });
+  //     document.getElementById('getCurrentLocation').addEventListener('click', function() {
+  //        AlipayJSBridge.call('getCurrentLocation', { requestType: 3, bizType: "test" }, function(result) {
+  //         if (result.error) {
+  //           alert(result.errorMessage);
+  //           return;
+  //         }
+  //         alert(JSON.stringify(result));
+  //       });
+  //     });
 
 
-    document.querySelector('startContinuousLocation').addEventListener('click', function() {
-    AlipayJSBridge.call('startContinuousLocation', { bizType: 'didi', callbackInterval: 5000 }, function (result) {
-      if (result.error) {
-        alert(result.errorMessage);
-        return;
-      }
-      alert(JSON.stringify(result));
-    });
-  });
+  //   document.querySelector('startContinuousLocation').addEventListener('click', function() {
+  //   AlipayJSBridge.call('startContinuousLocation', { bizType: 'didi', callbackInterval: 5000 }, function (result) {
+  //     if (result.error) {
+  //       alert(result.errorMessage);
+  //       return;
+  //     }
+  //     alert(JSON.stringify(result));
+  //   });
+  // });
 
-  document.querySelector('getSessionData').addEventListener('click', function() {
-    AlipayJSBridge.call('getSessionData', {
-      // keys: ['name', 'token', 'id', 'address', 'code', 'nickname', 'WebToken', 'UserInfo', 'userInfo', 'userToken', 'UserToken"]
-      keys: ['alipay_state']
-    }, function(result) {
-      alert(JSON.stringify(result));
-    });
-  });
+  // document.querySelector('getSessionData').addEventListener('click', function() {
+  //   AlipayJSBridge.call('getSessionData', {
+  //     // keys: ['name', 'token', 'id', 'address', 'code', 'nickname', 'WebToken', 'UserInfo', 'userInfo', 'userToken', 'UserToken"]
+  //     keys: ['alipay_state']
+  //   }, function(result) {
+  //     alert(JSON.stringify(result));
+  //   });
+  // });
 
-    });
+  //   });
 
-  document.querySelector('#kvInterface_getAll').addEventListener('click', function() {
-        alert(kvInterface.getAll());
-  });
-
-  document.querySelector('#windvane_screenshot').addEventListener('click', function() {
-      var jieping_params = {
-         inAlbum: true
-        };
-     window.__windvane__.nativeCall('WVScreen.capture', JSON.stringify(jieping_params), "successCallback", "failureCallback");
-  });
 
 
   </script>
