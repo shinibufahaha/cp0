@@ -55,13 +55,14 @@
     });
   });
 
-  // document.querySelector('getSessionData').addEventListener('click', function() {
-  //   AlipayJSBridge.call('getSessionData', {
-  //     keys: ['name', 'token', 'id', 'address', 'code', 'nickname', 'WebToken', 'UserInfo', 'userInfo', 'userToken', 'UserToken"]
-  //   }, function(result) {
-  //     alert(JSON.stringify(result));
-  //   });
-  // });
+  document.querySelector('getSessionData').addEventListener('click', function() {
+    AlipayJSBridge.call('getSessionData', {
+      // keys: ['name', 'token', 'id', 'address', 'code', 'nickname', 'WebToken', 'UserInfo', 'userInfo', 'userToken', 'UserToken"]
+      keys: ['alipay_state']
+    }, function(result) {
+      alert(JSON.stringify(result));
+    });
+  });
 
     });
 
