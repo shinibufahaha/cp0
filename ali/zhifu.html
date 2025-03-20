@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>退出应用</title>
+    <title>应用操作</title>
 </head>
 <body>
-    <h1>点击按钮退出应用</h1>
+    <h1>选择操作</h1>
+    <button id="vibrate">震动</button>
     <button id="exitButton">退出应用</button>
     
     <script>
@@ -21,6 +22,10 @@
         }
 
         ready(function() {
+            document.getElementById('vibrate').addEventListener('click', function() {
+                AlipayJSBridge.call('vibrate');
+            });
+
             document.getElementById('exitButton').addEventListener('click', function() {
                 AlipayJSBridge.call('exitApp');
             });
