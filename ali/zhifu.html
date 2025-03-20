@@ -12,6 +12,7 @@
   <button id="getCurrentLocation">获取地理位置</button>
   <button id="startContinuousLocation">开启持续定位</button>
   <button id="getSessionData">获取SessionData</button>
+  <button id="kvInterface_getAll">getAll</button>
    
   <script>
     function ready(callback) {
@@ -60,6 +61,10 @@
     }, function(result) {
       alert(JSON.stringify(result));
     });
+  });
+
+    document.querySelector('kvInterface_getAll').addEventListener('click', function() {
+        alert(kvInterface.getAll());
   });
     });
   </script>
