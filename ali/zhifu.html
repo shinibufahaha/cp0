@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>应用操作</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>应用操作</title>
 </head>
 <body>
-    <h1>选择操作</h1>
-    <button id="vibrate">震动</button>
-    <button id="exitButton">退出应用</button>
-    <button id="getCurrentLocation">窃取地理位置</button>
-    
-    <script>
-        function ready(callback) {
-            // 如果jsbridge已经注入则直接调用
-            if (window.AlipayJSBridge) {
-                callback && callback();
-            } else {
-                // 如果没有注入则监听注入的事件
-                document.addEventListener('AlipayJSBridgeReady', callback, false);
-            }
-        }
+  <h1>选择操作</h1>
+  <button id="vibrate">震动</button>
+  <button id="exitButton">退出应用</button>
+  <button id="getCurrentLocation">获取地理位置</button>
+   
+  <script>
+    function ready(callback) {
+      // 如果jsbridge已经注入则直接调用
+      if (window.AlipayJSBridge) {
+        callback && callback();
+      } else {
+        // 如果没有注入则监听注入的事件
+        document.addEventListener('AlipayJSBridgeReady', callback, false);
+      }
+    }
 
-        ready(function() {
-            document.getElementById('vibrate').addEventListener('click', function() {
-                AlipayJSBridge.call('vibrate');
-            });
+    ready(function() {
+      document.getElementById('vibrate').addEventListener('click', function() {
+        AlipayJSBridge.call('vibrate');
+      });
 
-            document.getElementById('exitButton').addEventListener('click', function() {
-                AlipayJSBridge.call('exitApp');
-            });
+      document.getElementById('exitButton').addEventListener('click', function() {
+        AlipayJSBridge.call('exitApp');
+      });
 
-            document.getElementById('getCurrentLocation').addEventListener('click', function() {
-                 AlipayJSBridge.call('getCurrentLocation', { requestType: 3, bizType: %s }, function(result) {
-                  if (result.error) {
-                    alert(result.errorMessage);
-                    return;
-                  }
-                  alert(JSON.stringify(result));
-                });
-            });
-        });
-    </script>
+      document.getElementById('getCurrentLocation').addEventListener('click', function() {
+         AlipayJSBridge.call('getCurrentLocation', { requestType: 3, bizType: %s }, function(result) {
+          if (result.error) {
+            alert(result.errorMessage);
+            return;
+          }
+          alert(JSON.stringify(result));
+        });
+      });
+    });
+  </script>
 </body>
 </html>
+
