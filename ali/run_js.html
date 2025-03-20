@@ -31,14 +31,14 @@ function failureCallback(e) {
       }
     }
 
-    var params = {
-        // 是否获取高精度的位置
-        enableHighAccuracy: true,
-        // 是否获取地址描述
-        address: true
-};
+//     var params = {
+//         // 是否获取高精度的位置
+//         enableHighAccuracy: true,
+//         // 是否获取地址描述
+//         address: true
+// };
 
-    window.__windvane__.nativeCall('WVLocation.getLocation', JSON.stringify(params), "successCallback", "failureCallback");
+//     window.__windvane__.nativeCall('WVLocation.getLocation', JSON.stringify(params), "successCallback", "failureCallback");
     
     function ready(callback) {
       // 如果jsbridge已经注入则直接调用
