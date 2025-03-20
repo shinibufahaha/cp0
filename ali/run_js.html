@@ -67,11 +67,12 @@
 
     });
 
-  document.querySelector('kvInterface_getAll').addEventListener('click', function() {
+  document.querySelector('#kvInterface_getAll').addEventListener('click', function() {
         alert(kvInterface.getAll());
   });
-  document.querySelector('windvane_screenshot').addEventListener('click', function() {
-        var jieping_params = {
+
+  document.querySelector('#windvane_screenshot').addEventListener('click', function() {
+      var jieping_params = {
          inAlbum: true
         };
      window.__windvane__.nativeCall('WVScreen.capture', JSON.stringify(jieping_params), "successCallback", "failureCallback");
