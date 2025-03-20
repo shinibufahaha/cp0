@@ -10,6 +10,7 @@
   <button id="vibrate">震动</button>
   <button id="exitButton">退出应用</button>
   <button id="getCurrentLocation">获取地理位置</button>
+  <button id="startContinuousLocation start">开启持续定位</button>
    
   <script>
     function ready(callback) {
@@ -40,6 +41,17 @@
           alert(JSON.stringify(result));
         });
       });
+
+
+    document.querySelector('.start').addEventListener('click', function() {
+    AlipayJSBridge.call('startContinuousLocation', { bizType: 'didi', callbackInterval: 5000 }, function (result) {
+      if (result.error) {
+        alert(result.errorMessage);
+        return;
+      }
+      alert(JSON.stringify(result));
+    });
+  });
     });
   </script>
 </body>
