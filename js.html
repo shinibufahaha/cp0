@@ -60,7 +60,13 @@ for (var key in window) {
         }
     }
 }
-alert(JSON.stringify(jsonObj, null, 4));
+// alert(JSON.stringify(jsonObj, null, 4));
+    
+for (let key in jsonObj) {
+    if (jsonObj.hasOwnProperty(key)) {
+        alert(`Key: ${key}, Value: ${jsonObj[key]}`);
+    }
+}
 
     
 
