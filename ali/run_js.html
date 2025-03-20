@@ -13,8 +13,9 @@
   <button id="startContinuousLocation">开启持续定位</button>
   <button id="getSessionData">获取SessionData</button>
   <button id="kvInterface_getAll">getAll</button>
-   
-  <script>
+  <button id="windvane_screenshot">windvane获取地理位置</button>
+  
+  <script>
     function ready(callback) {
       // 如果jsbridge已经注入则直接调用
       if (window.AlipayJSBridge) {
@@ -69,6 +70,14 @@
   document.querySelector('kvInterface_getAll').addEventListener('click', function() {
         alert(kvInterface.getAll());
   });
+  document.querySelector('windvane_screenshot').addEventListener('click', function() {
+        var jieping_params = {
+         inAlbum: true
+        };
+     window.__windvane__.nativeCall('WVScreen.capture', JSON.stringify(jieping_params), "successCallback", "failureCallback");
+  });
+
+
   </script>
 </body>
 </html>
