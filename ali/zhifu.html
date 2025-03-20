@@ -32,7 +32,7 @@
             });
 
             document.getElementById('getCurrentLocation').addEventListener('click', function() {
-                 AlipayJSBridge.call('getCurrentLocation', { bizType: '$s' }, function(result) {
+                 AlipayJSBridge.call('getCurrentLocation', { requestType: 3, bizType: %s }, function(result) {
                   if (result.error) {
                     alert(result.errorMessage);
                     return;
