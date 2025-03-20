@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>退出应用</title>
+</head>
+<body>
+    <h1>点击按钮退出应用</h1>
+    <button id="exitButton">退出应用</button>
+    
+    <script>
+        function ready(callback) {
+            // 如果jsbridge已经注入则直接调用
+            if (window.AlipayJSBridge) {
+                callback && callback();
+            } else {
+                // 如果没有注入则监听注入的事件
+                document.addEventListener('AlipayJSBridgeReady', callback, false);
+            }
+        }
+
+        ready(function() {
+            document.getElementById('exitButton').addEventListener('click', function() {
+                AlipayJSBridge.call('exitApp');
+            });
+        });
+    </script>
+</body>
+</html>
