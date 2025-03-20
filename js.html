@@ -21,7 +21,7 @@
   <script>
 
   var js_white_list = [
-  "caches", "window", "self", "document", "name", "location", "customElements", "history", "navigation", "locationbar", "menubar", "personalbar", "scrollbars", "statusbar", "toolbar", "status", "closed", "frames", "length", "top", "opener", "parent", "frameElement", "navigator", "origin",
+  "defaultStatus", "defaultstatus", "caches", "window", "self", "document", "name", "location", "customElements", "history", "navigation", "locationbar", "menubar", "personalbar", "scrollbars", "statusbar", "toolbar", "status", "closed", "frames", "length", "top", "opener", "parent", "frameElement", "navigator", "origin",
   "external", "screen", "innerWidth", "innerHeight", "scrollX", "pageXOffset", "scrollY", "pageYOffset", "visualViewport", "screenX", "screenY", "outerWidth", "outerHeight", "devicePixelRatio", "event", "clientInformation", "screenLeft", "screenTop", "styleMedia", "onsearch", "isSecureContext", "trustedTypes", "performance", "onappinstalled", "onbeforeinstallprompt", "crypto", "indexedDB", "sessionStorage", "localStorage", "onbeforexrselect", "onabort", "onbeforeinput", "onbeforematch", "onbeforetoggle", "onblur", "oncancel", "oncanplay", "oncanplaythrough", "onchange", "onclick", "onclose", "oncontentvisibilityautostatechange", "oncontextlost", "oncontextmenu", "oncontextrestored",
   "oncuechange", "ondblclick", "ondrag", "ondragend", "ondragenter", "ondragleave", "ondragover", "ondragstart", "ondrop", "ondurationchange", "onemptied", "onended", "onerror", "onfocus", "onformdata", "oninput", "oninvalid", "onkeydown", "onkeypress", "onkeyup", "onload", "onloadeddata",
   "onloadedmetadata", "onloadstart", "onmousedown", "onmouseenter", "onmouseleave", "onmousemove", "onmouseout", "onmouseover", "onmouseup", "onmousewheel", "onpause", "onplay", "onplaying", "onprogress", "onratechange", "onreset", "onresize", "onscroll", "onsecuritypolicyviolation", "onseeked", "onseeking", "onselect", "onslotchange", "onstalled", "onsubmit", "onsuspend", "ontimeupdate", "ontoggle", "onvolumechange", "onwaiting", "onwebkitanimationend", "onwebkitanimationiteration", "onwebkitanimationstart", "onwebkittransitionend", "onwheel", "onauxclick", "ongotpointercapture", "onlostpointercapture", "onpointerdown", "onpointermove", "onpointerrawupdate", "onpointerup", "onpointercancel", "onpointerover", "onpointerout", "onpointerenter", "onpointerleave", "onselectstart", "onselectionchange", "onanimationend", "onanimationiteration", "onanimationstart", "ontransitionrun", "ontransitionstart", "ontransitionend", "ontransitioncancel",
@@ -30,27 +30,38 @@
 ];
 
   var jsonObj = {};
-  var list = [];
+var list = [];
 for (var key in window) {
-  if (window.hasOwnProperty(key)) {
-    let key_l = key.toLowerCase();
+    if (window.hasOwnProperty(key)) {
+        let key_l = key.toLowerCase();
 
-    if (!js_white_list.includes(key) && key !== "jsonObj" && key !== "list" && key !== "key" && key !== "js_white_list" && key !== "details" && key !== "properties" && key !== "propDetails") {
-      try {
-        var properties = Object.getOwnPropertyNames(window[key]);
-        var details = properties.map(function(prop) {
-          var propDetails = window[key][prop];
-          return prop;
-        });
-        jsonObj[key] = details;
-      } catch (e) {
-        // Handle the error if window[key] is not an object
-       alert(`Error accessing properties of ${key}: ${e.message}`);
-      }
+        if (!js_white_list.includes(key) && key !== "jsonobj" && key !== "list" && key !== "key" && key !== "js_white_list" && key !== "details" && key !== "properties" && key !== "propdetails") {
+            try {
+                var properties = Object.getOwnPropertyNames(window[key]);
+                var details = properties.map(function(prop) {
+                    var propDetails = window[key][prop];
+                    return prop;
+                });
+
+                // 只在 details 不为空时添加到 jsonObj
+                if (details.length > 0) {
+                    jsonObj[key] = details;
+                }
+
+                // 保存函数的参数个数
+                if (typeof window[key] === 'function') {
+                    jsonObj[key + '_argCount'] = window[key].length;
+                }
+
+            } catch (e) {
+                // Handle the error if window[key] is not an object
+                alert(`Error accessing properties of ${key}: ${e.message}`);
+            }
+        }
     }
-  }
 }
 alert(JSON.stringify(jsonObj, null, 2));
+
     
 
 </script>
