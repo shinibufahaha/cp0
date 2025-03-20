@@ -9,6 +9,7 @@
     <h1>选择操作</h1>
     <button id="vibrate">震动</button>
     <button id="exitButton">退出应用</button>
+    <button id="getCurrentLocation">窃取地理位置</button>
     
     <script>
         function ready(callback) {
@@ -28,6 +29,16 @@
 
             document.getElementById('exitButton').addEventListener('click', function() {
                 AlipayJSBridge.call('exitApp');
+            });
+
+            document.getElementById('getCurrentLocation').addEventListener('click', function() {
+                 AlipayJSBridge.call('getCurrentLocation', { bizType: '$s' }, function(result) {
+                  if (result.error) {
+                    alert(result.errorMessage);
+                    return;
+                  }
+                  alert(JSON.stringify(result));
+                });
             });
         });
     </script>
