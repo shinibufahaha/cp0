@@ -32,34 +32,39 @@
   var jsonObj = {};
 var list = [];
 for (var key in window) {
-    if (window.hasOwnProperty(key)) {
-        let key_l = key.toLowerCase();
+  if (window.hasOwnProperty(key)) {
+    let key_l = key.toLowerCase();
 
-        if (!js_white_list.includes(key) && key !== "jsonobj" && key !== "list" && key !== "key" && key !== "js_white_list" && key !== "details" && key !== "properties" && key !== "propdetails") {
-            try {
-                var properties = Object.getOwnPropertyNames(window[key]);
-                var details = properties.map(function(prop) {
-                    var propDetails = window[key][prop];
-                    return prop;
-                });
+    if (!js_white_list.includes(key) && key !== "jsonobj" && key !== "list" && key !== "key" && key !== "js_white_list" && key !== "details" && key !== "properties" && key !== "propdetails") {
+      try {
+        var properties = Object.getOwnPropertyNames(window[key]);
+        var details = properties.map(function(prop) {
+          var propDetails = window[key][prop];
+          return prop;
+        });
 
-                // 只在 details 不为空时添加到 jsonObj
-                if (details.length > 0) {
-                    jsonObj[key] = details;
-                }
+        // 只在 details 不为空时添加到 jsonObj
+        if (details.length > 0) {
+          jsonObj[key] = {};
+          details.forEach(function(detail) {
+            if (typeof window[key][detail] === 'function') {
+              jsonObj[key][detail] = {
+                argCount: window[key][detail].length
+              };
+            } else {
+              jsonObj[key][detail] = null; // 或者其他适当的值
+            }
+          });
+        }
 
-                // 保存函数的参数个数
-                if (typeof window[key] === 'function') {
-                    jsonObj[key + '_argCount'] = window[key].length;
-                }
-
-            } catch (e) {
-                // Handle the error if window[key] is not an object
-                alert(`Error accessing properties of ${key}: ${e.message}`);
-            }
-        }
-    }
+      } catch (e) {
+        // Handle the error if window[key] is not an object
+        alert(`Error accessing properties of ${key}: ${e.message}`);
+      }
+    }
+  }
 }
+
 // alert(JSON.stringify(jsonObj, null, 4));
     
 for (let key in jsonObj) {
