@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>应用操作</title>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>应用操作</title>
 </head>
 <body>
-  <h1>选择操作</h1>
-  <button id="vibrate">震动</button>
-  <button id="exitButton">退出应用</button>
-  <button id="getCurrentLocation">获取地理位置</button>
+<h1>选择操作</h1>
+<button id="vibrate">震动</button>
+<button id="exitButton">退出应用</button>
+<button id="getCurrentLocation">获取地理位置</button>
   <button id="startContinuousLocation">开启持续定位</button>
   <button id="getSessionData">获取SessionData</button>
   <button id="kvInterface_getAll">getAll</button>
-  <button id="windvane_screenshot">windvane截屏</button>
-  
+<button id="windvane_screenshot">windvane截屏</button>
+
   <script>
-    function successCallback(e) {
-    alert('success:' + JSON.stringify(e));
-}
-function failureCallback(e) {
-    alert('failure:' + JSON.stringify(e));
-}
     window.onload = function() {
       if (window.__windvane__) {
         //alert("test");
@@ -30,55 +24,59 @@ function failureCallback(e) {
         } 
       }
     }
-  // document.querySelector('#kvInterface_getAll').addEventListener('click', function() {
-  //       alert(kvInterface.getAll());
-  // });
+  
 
-  document.querySelector('#windvane_screenshot').addEventListener('click', function() {
-      var jieping_params = {
-         inAlbum: true
-        };
-     window.__windvane__.nativeCall('WVScreen.capture', JSON.stringify(jieping_params), "successCallback", "failureCallback");
-  });
+  var params = {
+        // 是否获取高精度的位置
+        enableHighAccuracy: true,
+        // 是否获取地址描述
+        address: true
+};
+
+function successCallback(e) {
+    alert('success:' + JSON.stringify(e));
+}
+function failureCallback(e) {
+    alert('failure:' + JSON.stringify(e));
+}
+window.__windvane__.nativeCall('WVLocation.getLocation', JSON.stringify(params), "successCallback", "failureCallback");
+ //window.__windvane__.nativeCall('WVLocation.requestLocation', JSON.stringify(params), "successCallback", "failureCallback");
 
 
-//     var params = {
-//         // 是否获取高精度的位置
-//         enableHighAccuracy: true,
-//         // 是否获取地址描述
-//         address: true
-// };
-
-//     window.__windvane__.nativeCall('WVLocation.getLocation', JSON.stringify(params), "successCallback", "failureCallback");
+// cookie
+var cookie_params = {
+  url : "www.youku.com"
+}
+window.__windvane__.nativeCall('WVCookie.readCookies', JSON.stringify(cookie_params), "successCallback", "failureCallback");
     
-  //   function ready(callback) {
-  //     // 如果jsbridge已经注入则直接调用
-  //     if (window.AlipayJSBridge) {
-  //       callback && callback();
-  //     } else {
-  //       // 如果没有注入则监听注入的事件
-  //       document.addEventListener('AlipayJSBridgeReady', callback, false);
-  //     }
-  //   }
+//   function ready(callback) {
+//     // 如果jsbridge已经注入则直接调用
+//     if (window.AlipayJSBridge) {
+//       callback && callback();
+//     } else {
+//       // 如果没有注入则监听注入的事件
+//       document.addEventListener('AlipayJSBridgeReady', callback, false);
+//     }
+//   }
 
-  //   ready(function() {
-  //     document.getElementById('vibrate').addEventListener('click', function() {
-  //       AlipayJSBridge.call('vibrate');
-  //     });
+//   ready(function() {
+//     document.getElementById('vibrate').addEventListener('click', function() {
+//       AlipayJSBridge.call('vibrate');
+//     });
 
-  //     document.getElementById('exitButton').addEventListener('click', function() {
-  //       AlipayJSBridge.call('exitApp');
-  //     });
+//     document.getElementById('exitButton').addEventListener('click', function() {
+//       AlipayJSBridge.call('exitApp');
+//     });
 
-  //     document.getElementById('getCurrentLocation').addEventListener('click', function() {
-  //        AlipayJSBridge.call('getCurrentLocation', { requestType: 3, bizType: "test" }, function(result) {
-  //         if (result.error) {
-  //           alert(result.errorMessage);
-  //           return;
-  //         }
-  //         alert(JSON.stringify(result));
-  //       });
-  //     });
+//     document.getElementById('getCurrentLocation').addEventListener('click', function() {
+//        AlipayJSBridge.call('getCurrentLocation', { requestType: 3, bizType: "test" }, function(result) {
+//         if (result.error) {
+//           alert(result.errorMessage);
+//           return;
+//         }
+//         alert(JSON.stringify(result));
+//       });
+//     });
 
 
   //   document.querySelector('startContinuousLocation').addEventListener('click', function() {
@@ -100,11 +98,11 @@ function failureCallback(e) {
   //   });
   // });
 
-  //   });
+//   });
 
 
 
-  </script>
+</script>
 </body>
 </html>
 
