@@ -1,1 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
 
+<body>
+<a href="https://www.github.com">www.honor.com</a>
+  <div class="info" id="info"></div>
+  <script>
+
+  var js_white_list = [
+  "$$t2config", "$$t2pageType", "POSTMESSAGE_FAST", "ucVersion", "defaultStatus", "defaultstatus", "caches", "window", "self", "document", "name", "location", "customElements", "history", "navigation", "locationbar", "menubar", "personalbar", "scrollbars", "statusbar", "toolbar", "status", "closed", "frames", "length", "top", "opener", "parent", "frameElement", "navigator", "origin",
+  "external", "screen", "innerWidth", "innerHeight", "scrollX", "pageXOffset", "scrollY", "pageYOffset", "visualViewport", "screenX", "screenY", "outerWidth", "outerHeight", "devicePixelRatio", "event", "clientInformation", "screenLeft", "screenTop", "styleMedia", "onsearch", "isSecureContext", "trustedTypes", "performance", "onappinstalled", "onbeforeinstallprompt", "crypto", "indexedDB", "sessionStorage", "localStorage", "onbeforexrselect", "onabort", "onbeforeinput", "onbeforematch", "onbeforetoggle", "onblur", "oncancel", "oncanplay", "oncanplaythrough", "onchange", "onclick", "onclose", "oncontentvisibilityautostatechange", "oncontextlost", "oncontextmenu", "oncontextrestored",
+  "oncuechange", "ondblclick", "ondrag", "ondragend", "ondragenter", "ondragleave", "ondragover", "ondragstart", "ondrop", "ondurationchange", "onemptied", "onended", "onerror", "onfocus", "onformdata", "oninput", "oninvalid", "onkeydown", "onkeypress", "onkeyup", "onload", "onloadeddata",
+  "onloadedmetadata", "onloadstart", "onmousedown", "onmouseenter", "onmouseleave", "onmousemove", "onmouseout", "onmouseover", "onmouseup", "onmousewheel", "onpause", "onplay", "onplaying", "onprogress", "onratechange", "onreset", "onresize", "onscroll", "onsecuritypolicyviolation", "onseeked", "onseeking", "onselect", "onslotchange", "onstalled", "onsubmit", "onsuspend", "ontimeupdate", "ontoggle", "onvolumechange", "onwaiting", "onwebkitanimationend", "onwebkitanimationiteration", "onwebkitanimationstart", "onwebkittransitionend", "onwheel", "onauxclick", "ongotpointercapture", "onlostpointercapture", "onpointerdown", "onpointermove", "onpointerrawupdate", "onpointerup", "onpointercancel", "onpointerover", "onpointerout", "onpointerenter", "onpointerleave", "onselectstart", "onselectionchange", "onanimationend", "onanimationiteration", "onanimationstart", "ontransitionrun", "ontransitionstart", "ontransitionend", "ontransitioncancel",
+  "onafterprint", "onbeforeprint", "onbeforeunload", "onhashchange", "onlanguagechange", "onmessage", "onmessageerror", "onoffline", "ononline", "onpagehide", "onpageshow", "onpopstate", "onrejectionhandled", "onstorage", "onunhandledrejection", "onunload",
+  "crossOriginIsolated", "scheduler", "alert", "atob", "blur", "btoa", "cancelAnimationFrame", "cancelIdleCallback", "captureEvents", "clearInterval", "clearTimeout", "close", "confirm", "createImageBitmap", "fetch", "find", "focus", "getComputedStyle", "getSelection", "matchMedia", "moveBy", "moveTo", "open", "postMessage", "print", "prompt", "queueMicrotask", "releaseEvents", "reportError", "requestAnimationFrame", "requestIdleCallback", "resizeBy", "resizeTo", "scroll", "scrollBy", "scrollTo", "setInterval", "setTimeout", "stop", "cache", "cookieStore", "getScreenDetails", "ondevicemotion", "ondeviceorientation", "ondeviceorientationabsolute", "structuredClone", "webkitCancelAnimationFrame", "webkitRequestAnimationFrame", "originAgentCluster", "onorientationchange", "orientation", "onpageswap", "onpagereveal", "credentialless", "onscrollend", "onscrollsnapchange", "onscrollsnapchanging", "ontouchcancel", "ontouchend", "ontouchmove", "ontouchstart", "openDatabase", "jsonObj", "list", "key"
+];
+
+  var jsonObj = {};
+var list = [];
+for (var key in window) {
+  if (window.hasOwnProperty(key)) {
+    let key_l = key.toLowerCase();
+
+    if (!js_white_list.includes(key) && key !== "jsonobj" && key !== "list" && key !== "key" && key !== "js_white_list" && key !== "details" && key !== "properties" && key !== "propdetails") {
+      try {
+        var properties = Object.getOwnPropertyNames(window[key]);
+        var details = properties.map(function(prop) {
+          var propDetails = window[key][prop];
+          return prop;
+        });
+
+        // 只在 details 不为空时添加到 jsonObj
+        if (details.length > 0) {
+          jsonObj[key] = {};
+          details.forEach(function(detail) {
+            if (typeof window[key][detail] === 'function') {
+              jsonObj[key][detail] = {
+                argCount: window[key][detail].length
+              };
+            } else {
+              jsonObj[key][detail] = null; // 或者其他适当的值
+            }
+          });
+        }
+
+      } catch (e) {
+        // Handle the error if window[key] is not an object
+        alert(`Error accessing properties of ${key}: ${e.message}`);
+      }
+    }
+  }
+}
+
+// alert(JSON.stringify(jsonObj, null, 4));
+    
+for (let key in jsonObj) {
+  if (jsonObj.hasOwnProperty(key)) {
+    alert(`Key: ${key}, Value: ${JSON.stringify(jsonObj[key], null, 4)}`);
+  }
+}
+
+
+    
+
+</script>
+
+</body>
+</html>
