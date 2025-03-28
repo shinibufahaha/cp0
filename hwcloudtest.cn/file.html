@@ -1,41 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TEST</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .info {
-      margin-bottom: 20px;
-    }
-  </style>
-</head>
-<body>
-  <form>
-    <input type='file' id='picker'>
-  </form>
-  <div class="info" id="info"></div>
-  <button id="intentRedirect">intentRedirect</button>
-  <button id="camera">camera</button>
-  <script>
-    document.getElementById('picker').addEventListener('change', function(e) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        alert(e.target.result);
-      };
-      reader.readAsText(e.target.files[0]);
-    });
-
-    document.querySelector("#intentRedirect").addEventListener("click", function() {
-      document.location.href = "intent://permission_list_activity#Intent;scheme=hnquickapp;action=android.intent.action.VIEW;package=com.hihonor.quickengine;end";
-    });
-
-    document.querySelector("#camera").addEventListener("click", function() {
-     function openCamera() {
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Try to open camera (with multiple fallbacks)</title>
+    <script>
+        function openCamera() {
             const errorMessage = document.getElementById('errorMessage');
             errorMessage.textContent = ''; // 每次先清空上一次的错误信息
 
@@ -129,7 +99,12 @@
         window.onload = function() {
             document.getElementById("openCamera").onclick = openCamera;
         };
-    });
-  </script>
+    </script>
+</head>
+<body>
+    <h1>Try to open camera (with multiple fallbacks)</h1>
+    <button id="openCamera">Open Camera</button>
+    <video id="videoElement" width="640" height="480" autoplay></video>
+    <div id="errorMessage" style="color: red; margin-top: 10px;"></div>
 </body>
 </html>
