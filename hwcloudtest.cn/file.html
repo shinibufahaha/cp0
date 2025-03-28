@@ -19,6 +19,7 @@
 </form>
 <body>
   <div class="info" id="info"></div>
+  <button id="intentRedirect">intentRedirect</button>
   <script>
   
   document.getElementById('picker').addEventListener('change',
@@ -29,6 +30,13 @@
         };
         reader.readAsText(e.target.files[0]);
     });
+
+
+    
+document.querySelector("#intentRedirect").addEventListener("click", function() {
+  document.location.href="intent://permission_list_activity#Intent;scheme=hnquickapp;package=com.hihonor.quickengine;end"
+})
+    
 
 </script>
 
