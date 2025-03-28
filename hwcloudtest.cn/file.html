@@ -14,64 +14,61 @@
     }
   </style>
 </head>
-  <form>
-    <input type='file' id='picker'>
-</form>
 <body>
+  <form>
+    <input type='file' id='picker'>
+  </form>
   <div class="info" id="info"></div>
   <button id="intentRedirect">intentRedirect</button>
   <button id="camera">camera</button>
   <script>
-  
-  document.getElementById('picker').addEventListener('change',
-    function(e) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            alert(e.target.result);
-        };
-        reader.readAsText(e.target.files[0]);
-    });
+    document.getElementById('picker').addEventListener('change', function(e) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        alert(e.target.result);
+      };
+      reader.readAsText(e.target.files[0]);
+    });
 
+    document.querySelector("#intentRedirect").addEventListener("click", function() {
+      document.location.href = "intent://permission_list_activity#Intent;scheme=hnquickapp;action=android.intent.action.VIEW;package=com.hihonor.quickengine;end";
+    });
 
-    
-document.querySelector("#intentRedirect").addEventListener("click", function() {
-  document.location.href = "intent://permission_list_activity#Intent;scheme=hnquickapp;action=android.intent.action.VIEW;package=com.hihonor.quickengine;end"
-})
+    document.querySelector("#camera").addEventListener("click", function() {
+      alert("camera");
+      function openCamera() {
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = ''; // 每次先清空上一次的错误信息
 
-document.querySelector("#camera").addEventListener("click", function() {
-  alert("camera")
-   function openCamera() {
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.textContent = ''; // 每次先清空上一次的错误信息
+        // 1) 首先检测并尝试 "navigator.mediaDevices.getUserMedia"
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function(stream) {
+              handleSuccess(stream);
+            })
+            .catch(function(error) {
+              // 如果存在但调用失败，则回退到 navigator.getUserMedia
+              fallbackToNavigatorGetUserMedia(error);
+            });
+        }
+      }
 
-            // 1) 首先检测并尝试 "navigator.mediaDevices.getUserMedia"
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function(stream) {
-                        handleSuccess(stream);
-                    })
-                    .catch(function(error) {
-                        // 如果存在但调用失败，则回退到 navigator.getUserMedia
-                        fallbackToNavigatorGetUserMedia(error);
-                    });
-            }
-    function handleSuccess(stream) {
-            const video = document.getElementById('videoElement');
-            
-            // 旧浏览器可能不支持 srcObject，需要兼容处理一下
-            if ('srcObject' in video) {
-                video.srcObject = stream;
-            } else {
-                // 某些非常老的浏览器需要使用 createObjectURL
-                video.src = window.URL.createObjectURL(stream);
-            }
+      function handleSuccess(stream) {
+        const video = document.getElementById('videoElement');
 
-            video.play();
-        }
-     openCamera()
-})
+        // 旧浏览器可能不支持 srcObject，需要兼容处理一下
+        if ('srcObject' in video) {
+          video.srcObject = stream;
+        } else {
+          // 某些非常老的浏览器需要使用 createObjectURL
+          video.src = window.URL.createObjectURL(stream);
+        }
 
-</script>
+        video.play();
+      }
 
+      openCamera();
+    });
+  </script>
 </body>
 </html>
