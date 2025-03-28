@@ -1,20 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>HNHCSL</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Try to open camera (with multiple fallbacks)</title>
+    <script>
+        function openCamera() {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = ''; // 每次先清空上一次的错误信息
+
+            // 1) 首先检测并尝试 "navigator.mediaDevices.getUserMedia"
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function(stream) {
+                        handleSuccess(stream);
+                    })
+                    .catch(function(error) {
+                        // 如果存在但调用失败，则回退到 navigator.getUserMedia
+                        fallbackToNavigatorGetUserMedia(error);
+                    });
+            } else {
+                // 如果根本不支持 mediaDevices，再直接回退
+                fallbackToNavigatorGetUserMedia(new Error("navigator.mediaDevices.getUserMedia is not supported."));
+            }
+        }
+
+        // 2) 回退到 navigator.getUserMedia
+        function fallbackToNavigatorGetUserMedia(prevError) {
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (navigator.getUserMedia) {
+                navigator.getUserMedia(
+                    { video: true },
+                    function(stream) {
+                        handleSuccess(stream);
+                    },
+                    function(error) {
+                        // 如果调用失败，再回退到 webkitGetUserMedia
+                        fallbackToWebkitGetUserMedia(prevError, error);
+                    }
+                );
+            } else {
+                // 如果根本没有 navigator.getUserMedia，则继续回退
+                fallbackToWebkitGetUserMedia(prevError, new Error("navigator.getUserMedia is not supported."));
+            }
+        }
+
+        // 3) 回退到 navigator.webkitGetUserMedia
+        function fallbackToWebkitGetUserMedia(prevError1, prevError2) {
+            const errorMessage = document.getElementById('errorMessage');
+
+            if (navigator.webkitGetUserMedia) {
+                navigator.webkitGetUserMedia(
+                    { video: true },
+                    function(stream) {
+                        handleSuccess(stream);
+                    },
+                    function(error) {
+                        // 也失败了
+                        showAllErrors(prevError1, prevError2, error);
+                    }
+                );
+            } else {
+                showAllErrors(prevError1, prevError2, new Error("navigator.webkitGetUserMedia is not supported."));
+            }
+        }
+
+        // 成功获取摄像头流时的处理
+        function handleSuccess(stream) {
+            const video = document.getElementById('videoElement');
+            
+            // 旧浏览器可能不支持 srcObject，需要兼容处理一下
+            if ('srcObject' in video) {
+                video.srcObject = stream;
+            } else {
+                // 某些非常老的浏览器需要使用 createObjectURL
+                video.src = window.URL.createObjectURL(stream);
+            }
+
+            video.play();
+        }
+
+        // 最终所有方法都失败时，把错误原因都显示出来
+        function showAllErrors(err1, err2, err3) {
+            const errorMessage = document.getElementById('errorMessage');
+            const msg1 = err1 ? err1.message : '(none)';
+            const msg2 = err2 ? err2.message : '(none)';
+            const msg3 = err3 ? err3.message : '(none)';
+
+            errorMessage.textContent = 
+                "Failed to open camera.\n\n" +
+                " - mediaDevices error: " + msg1 + "\n" +
+                " - navigator.getUserMedia error: " + msg2 + "\n" +
+                " - webkitGetUserMedia error: " + msg3;
+        }
+
+        // 页面加载完后，把 openCamera() 绑定给按钮
+        window.onload = function() {
+            document.getElementById("openCamera").onclick = openCamera;
+        };
+    </script>
 </head>
 <body>
-    <h1>HNHCSL的个人主页</h1>
-    <h1>Welcome to HNHCSL blog.</h1>
+    <h1>Try to open camera (with multiple fallbacks)</h1>
+    <button id="openCamera">Open Camera</button>
+    <video id="videoElement" width="640" height="480" autoplay></video>
+    <div id="errorMessage" style="color: red; margin-top: 10px;"></div>
 </body>
-    <script>
-      // alert(brainMapH5JsMethods.getInitParam());
-      // alert(brainMapH5JsMethods.getMindRefStr());
-      // alert(brainMapH5JsMethods.getRawMind());
-      // alert(brainMapH5JsMethods.getRef());
-      // alert(brainMapH5JsMethods.saveBrainImage());
-      // brainMapH5JsMethods.trackFitClick()；
-      brainMapH5JsMethods.trackRefClick("www.baidu.com", "hcsl");
-    </script>
 </html>
