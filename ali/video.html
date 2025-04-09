@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <button id="getLocationButton">Get Location</button>
+  <button id="writeFileButton">Write File</button>
+  <button id="readCookiesButton">Read Cookies</button>
+  <button id="userTracker">User Tracker</button>
+
+  <script>
+    // window.onload = function() {
+    //   if (window.__windvane__) {
+    //     window.__windvane__.onSuccess = function(callbackFunction, data) {
+    //       alert("data " + JSON.stringify(data));
+    //     };
+    //   }
+    // };
+
+    var params = {
+      // 是否获取高精度的位置
+      enableHighAccuracy: true,
+      // 是否获取地址描述
+      address: true
+    };
+
+    function successCallback(e) {
+      alert('success:' + JSON.stringify(e));
+    }
+    function failureCallback(e) {
+      alert('failure:' + JSON.stringify(e));
+    }
+
+    // Button to get location
+    document.getElementById('getLocationButton').addEventListener('click', function() {
+      window.__windvane__.nativeCall('WVLocation.getLocation', JSON.stringify(params), "successCallback", "failureCallback");
+    });
+
+    // Button to write a file
+    document.getElementById('writeFileButton').addEventListener('click', function() {
+      var file_params = {
+        "mode": "overwrite",
+        "data": "123",
+        "fileName": "test.txt",
+        "share": true,
+      };
+      window.__windvane__.nativeCall('WVFile.write', JSON.stringify(file_params), "successCallback", "failureCallback");
+    });
+
+    // Button to read cookies
+    document.getElementById('readCookiesButton').addEventListener('click', function() {
+      var cookie_params = {
+        url: "www.youku.com"
+      };
+      window.__windvane__.nativeCall('WVCookie.readCookies', JSON.stringify(cookie_params), "successCallback", "failureCallback");
+    });
+
+
+      document.getElementById('userTracker').addEventListener('click', function() {
+      var tracker_params = {"functype":"2101","spmcnt":"0.0.0.0.794b3f1bR35jSq","spmurl":"","spmpre":"","logkey":"/starlink.sdk.evoke","logkeyargs":"{\"gmkey\":\"EXP\",\"gokey\":\"activity_id=&star_id=lite&slk_sid=JA59ILw0RgQCASujZnE8KmHu_1744186023326&slk_gid=&platform=Android&platform_version=15&bc_fl_src=tmall_market_llb_1_2695836&isAuto=1&call_target=taobao&call_type=scheme&slk_t=1744186024474&t=1744186024474\",\"lver\":\"8.15.24\",\"jsver\":\"aplus_std\",\"version\":\"v20240910\",\"spm_cnt\":\"0.0.0.0.794b3f1bR35jSq\",\"spm_url\":\"\",\"spm_pre\":\"\",\"_is_g2u_\":2,\"_bridgeName\":\"WindVane\",\"bridgeVersion\":\"3.0.4\",\"_toUT\":1}","urlpagename":"","url":"https://equity.tmall.com/tm?agentId=d6249a05e26144b1&bc_fl_src=tmall_market_llb_1_2695836&llbPlatform=_pube&llbOsd=1&di=__IDFA__&dim=__IMEI__&oaid=__OAID__&caid=__CAID__&sy=llb","cna":"JA59ILw0RgQCASujZnE8KmHu","extendargs":"","isonepage":"-1","_slog":"0"}
+      
+        window.__windvane__.nativeCall('WVTBUserTrack.toUT', JSON.stringify(tracker_params), "wvapi:51218", "https://equity.tmall.com/tm?agentId=d6249a05e26144b1&bc_fl_src=tmall_market_llb_1_2695836&llbPlatform=_pube&llbOsd=1&di=__IDFA__&dim=__IMEI__&oaid=__OAID__&caid=__CAID__&sy=llb");
+    });
+  </script>
+</body>
+</html>
